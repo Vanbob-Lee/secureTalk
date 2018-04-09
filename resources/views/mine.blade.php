@@ -86,3 +86,8 @@
         </div>
     </div>
 </div>
+
+<div class="weui-flex">
+    <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_primary" style="margin-left: 10px">保存信息</a></div>
+    <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_disabled weui-btn_warn" style="margin-left: 10px;margin-right: 10px">退出登陆</a></div>
+</div>
