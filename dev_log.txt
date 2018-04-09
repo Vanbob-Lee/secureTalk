@@ -1,0 +1,10 @@
+composer.lock doctrine/instantiator 改为7.0
+
+composer require workerman/workerman
+
+php artisan make:command workerman
+
+app/Console/Commands/workerman.php
+use Workerman\Worker;
+$signature $description handle()
+上面这些操作都没啥用...
