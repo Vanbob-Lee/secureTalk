@@ -72,19 +72,27 @@
     <button onclick="search();" class="weui-search-bar__cancel-btn weui-btn weui-btn_mini weui-btn_default" id="searchCancel">搜索</button>
 </div>
 
-<div class="weui-grids">
-    @if(isset($results))
-        @foreach($results as $rs)
-            <a href="/view/info?id={{ $rs->id }}" class="weui-grid">
-                <div class="weui-grid__icon">
-                    <img src="{{ $rs->head or '/img/head.png' }}" alt="">
-                </div>
-                <p class="weui-grid__label">
-                    {{ $rs->name }}
-                </p>
-            </a>
-        @endforeach
-    @endif
+
+@if(isset($results))
+    <div class="weui-grids">
+    @foreach($results as $rs)
+        <a href="/view/info?id={{ $rs->id }}" class="weui-grid">
+            <div class="weui-grid__icon">
+                <img src="{{ $rs->head or '/img/head.png' }}" alt="">
+            </div>
+            <p class="weui-grid__label">
+                {{ $rs->name }}
+            </p>
+        </a>
+    @endforeach
+    </div>
+@endif
+
+<div class="weui-footer weui-footer_fixed-bottom">
+    <p class="weui-footer__links">
+        <a href="/view/index" class="weui-footer__link">返回首页</a>
+    </p>
+    <p class="weui-footer__text">Copyright &copy; 2018 SecureTalk</p>
 </div>
 </body>
 </html>

@@ -87,6 +87,13 @@
 <input type="hidden" id="uid" name="id" value="{{ $user->id or '' }}">
 <input type="hidden" id="my_id" name="id" value="{{ $my_id or '' }}">
 </body>
+
+<div class="weui-footer weui-footer_fixed-bottom">
+    <p class="weui-footer__links">
+        <a href="/view/index" class="weui-footer__link">返回首页</a>
+    </p>
+    <p class="weui-footer__text">Copyright &copy; 2018 SecureTalk</p>
+</div>
 </html>
 
 <script>

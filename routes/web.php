@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return redirect('/login');
 });
 Route::get('/test', function() {
     \App\User::find(2)->update(['info'=>'abc', 'name'=>'vb love guang']);
