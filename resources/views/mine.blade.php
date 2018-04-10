@@ -1,6 +1,7 @@
 @php
 $me = Auth::user();
-$info = json_decode($me->info);
+if ($me)
+    $info = json_decode($me->info);
 @endphp
 <form id="my_info" method="post" action="/logic/edit_info">
 <div class="weui-cells" style="margin-top: 0px">
