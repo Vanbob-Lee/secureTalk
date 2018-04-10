@@ -64,8 +64,8 @@ if ($me)
             </select>
             <script>
                 <!--select元素不能直接指定value-->
-                $('#sex_sel').val('{{ $info->sex }}');
-                $('#city_sel').val('{{ $info->city }}');
+                $('#sex_sel').val('{{ $info->sex or '' }}');
+                $('#city_sel').val('{{ $info->city or '' }}');
             </script>
         </div>
         <div class="weui-cell__bd">
