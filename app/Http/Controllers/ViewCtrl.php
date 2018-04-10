@@ -30,8 +30,12 @@ class ViewCtrl extends Controller
 
     private function search($req) {
         if (!$req->keyword) return [];
-        $results = User::orwhere('name', 'like', '%'.$req->keyword.'%')
-            ->orwhere('email', 'like', '%'.$req->keyword.'%')
+        $results = User::where('id', '!=', 3)
+            ->where(function ($q) use($req) {
+                $q->orwhere('name', 'like', '%'.$req->keyword.'%')
+                    ->orwhere('email', 'like', '%'.$req->keyword.'%@%');
+                // 防止搜索gmail而找出所有使用谷歌邮箱注册的用户
+            })
             ->get()->all();
         return compact('results');
     }
