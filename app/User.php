@@ -11,11 +11,11 @@ class User extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
-     *
+     * 大坑：不在此数组内的字段不可修改
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'info'
     ];
 
     /**

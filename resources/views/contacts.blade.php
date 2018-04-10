@@ -4,8 +4,8 @@
             <img src="/img/search.png" style="width: 50px;display: block"/>
         </div>
         <div class="weui-cell__bd">
-            <p>添加好友</p>
-            <p style="font-size: 13px;color: #888888;">按用户名搜索，找到您的好友</p>
+            <a href="/view/search">添加联系人</a>
+            <p style="font-size: 13px;color: #888888;">按用户名或邮箱搜索，找到您的朋友</p>
         </div>
     </div>
 </div>
@@ -15,7 +15,7 @@
         @foreach($friends as $fri)
             <a href="javascript:;" class="weui-grid">
                 <div class="weui-grid__icon">
-                    <img src="{{ $fri->head }}" alt="">
+                    <img src="{{ $fri->head or '/img/head.png' }}" alt="">
                 </div>
                 <p class="weui-grid__label">
                     {{ $fri->name }}

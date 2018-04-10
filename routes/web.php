@@ -14,4 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test', function() {
+    \App\User::find(2)->update(['info'=>'abc', 'name'=>'vb love guang']);
+});
 Route::get('/view/{part}', 'ViewCtrl');
+Route::any('/logic/{part}', 'LogicCtrl');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

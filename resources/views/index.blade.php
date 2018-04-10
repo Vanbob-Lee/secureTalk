@@ -3,7 +3,6 @@
 @include('html_head')
 
 <body style="height: 100%;">
-<!-- 使用 -->
 
 <div class="weui-tab" style="height: 100%;">
     <div class="weui-tab__panel" id="panel">
