@@ -69,7 +69,7 @@
             <span>搜索</span>
         </label>
     </form>
-    <button onclick="search();" class="weui-btn weui-btn_mini weui-btn_default" id="searchCancel">搜索</button>
+    <button onclick="search();" class="weui-btn weui-btn_mini weui-btn_primary">搜索</button>
 </div>
 
 
