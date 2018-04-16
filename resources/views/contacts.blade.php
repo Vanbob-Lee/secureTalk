@@ -14,9 +14,9 @@
 @if(isset($contacts))
     <div class="weui-grids">
     @foreach($contacts as $con)
-        <a href="javascript:;" class="weui-grid">
+        <a href="/view/chat?cid={{ $con->id }}" class="weui-grid">
             <div class="weui-grid__icon">
-                <img src="{{ $con->head or '/img/head.png' }}" alt="">
+                <img src="{{ $con->head or '/img/head.png' }}">
             </div>
             <p class="weui-grid__label">
                 {{ $con->name }}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Message;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
@@ -45,5 +46,17 @@ class ViewCtrl extends Controller
         if ($me) $info = json_decode($this->me->info);
         $user = User::find($req->id);
         return compact('user', 'me', 'info');
+    }
+
+    // 从联系人中点开聊天窗口；或从未读消息中点开
+    private function chat($req) {
+        $my_id = $this->me->id;
+        $con = User::find($req->cid);
+        $msg_builder = Message::where('read', 0)
+            ->where('recv_id', $this->me->id)
+            ->where('sender_id', $con->id);
+        $msg = $msg_builder->get()->all();
+        //$msg_builder->update(['read' => 1]);
+        return compact('con', 'msg', 'my_id');
     }
 }

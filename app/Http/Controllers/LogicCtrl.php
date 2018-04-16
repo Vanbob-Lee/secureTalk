@@ -46,4 +46,8 @@ class LogicCtrl extends Controller
             ->where('con_id', $req->uid)->delete();
         return "已删除";
     }
+
+    public function send_msg($req) {
+
+    }
 }
