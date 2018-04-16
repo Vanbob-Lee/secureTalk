@@ -44,7 +44,7 @@
         @foreach($msg as $m)
             <li class="list-group-item" style="text-align: left;width: 80%;margin-top: 10px;margin-left: 10px">
                 <span style="color: #1b6d85">{{ $m->sender->name }}</span>
-                <br><span style="font-size: 150%;margin-left: 5px">{{ $m->content }}</span>
+                <br><span style="font-size: 120%;margin-left: 5px">{{ $m->content }}</span>
             </li>
         @endforeach
     @endif
