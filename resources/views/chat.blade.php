@@ -51,7 +51,7 @@
         <li class="list-group-item pull-right"
             style="text-align: right;width: 80%;margin-top: 10px;margin-right: 10px;background: #2ca02c">
             <span style="color: #1b6d85">me</span>
-            <br><span style="font-size: 150%;margin-right: 5px">msg</span>
+            <br><span style="font-size: 120%;margin-right: 5px">msg</span>
         </li>
 </ul>
 

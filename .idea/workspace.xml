@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9d56c357-3a36-41c0-b4fb-2ce14b559704" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/resources/views/chat.blade.php" afterPath="$PROJECT_DIR$/resources/views/chat.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -133,8 +134,8 @@
       <file leaf-file-name="chat.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/chat.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="62" column="10" lean-forward="true" selection-start-line="62" selection-start-column="10" selection-end-line="62" selection-end-column="10" />
+            <state relative-caret-position="308">
+              <caret line="53" column="38" lean-forward="true" selection-start-line="53" selection-start-column="38" selection-end-line="53" selection-end-column="38" />
               <folding>
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#li#0;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -142,17 +143,16 @@
                 <element signature="n#style#0;n#span#1;n#li#0;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#li#1;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#li#1;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#1;n#li#1;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#textarea#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1523889216432" expanded="true" signature="80:92" ph="..." />
-                <marker date="1523889216432" expanded="true" signature="497:505" ph="..." />
-                <marker date="1523889216432" expanded="true" signature="531:541" ph="..." />
-                <marker date="1523889216432" expanded="true" signature="1231:1232" ph="..." />
-                <marker date="1523889216432" expanded="true" signature="1231:1235" ph="..." />
-                <marker date="1523889216432" expanded="true" signature="1254:1264" ph="..." />
-                <marker date="1523889216432" expanded="true" signature="1425:1443" ph="..." />
-                <marker date="1523889216432" expanded="true" signature="1522:1535" ph="..." />
+                <marker date="1523889575079" expanded="true" signature="80:92" ph="..." />
+                <marker date="1523889575079" expanded="true" signature="497:505" ph="..." />
+                <marker date="1523889575079" expanded="true" signature="531:541" ph="..." />
+                <marker date="1523889575079" expanded="true" signature="1231:1232" ph="..." />
+                <marker date="1523889575079" expanded="true" signature="1231:1235" ph="..." />
+                <marker date="1523889575079" expanded="true" signature="1254:1264" ph="..." />
+                <marker date="1523889575079" expanded="true" signature="1425:1443" ph="..." />
+                <marker date="1523889575079" expanded="true" signature="1522:1535" ph="..." />
               </folding>
             </state>
           </provider>
@@ -500,7 +500,7 @@
       <workItem from="1523101649505" duration="7706000" />
       <workItem from="1523178762123" duration="16259000" />
       <workItem from="1523250183932" duration="32425000" />
-      <workItem from="1523872321654" duration="11952000" />
+      <workItem from="1523872321654" duration="12073000" />
     </task>
     <task id="LOCAL-00001" summary="some views">
       <created>1523258462329</created>
@@ -579,14 +579,22 @@
       <option name="project" value="LOCAL" />
       <updated>1523889288385</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="chat view">
+      <created>1523889470774</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1523889470774</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68342000" />
+    <option name="totallyTimeSpent" value="68463000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277592" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -594,7 +602,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3443163" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22617246" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22617246" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.301059" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -979,13 +987,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://table:/fd6a0117/b8ae6409-0475-45a2-ba6f-c61730dc3e66/test.messages">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/contacts.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
@@ -1006,13 +1007,6 @@
         <state relative-caret-position="242">
           <caret line="20" column="15" lean-forward="true" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://table:/fd6a0117/b8ae6409-0475-45a2-ba6f-c61730dc3e66/test.users">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -1093,10 +1087,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="das://table:/fd6a0117/b8ae6409-0475-45a2-ba6f-c61730dc3e66/test.users">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/fd6a0117/b8ae6409-0475-45a2-ba6f-c61730dc3e66/test.messages">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/chat.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="62" column="10" lean-forward="true" selection-start-line="62" selection-start-column="10" selection-end-line="62" selection-end-column="10" />
+        <state relative-caret-position="308">
+          <caret line="53" column="38" lean-forward="true" selection-start-line="53" selection-start-column="38" selection-end-line="53" selection-end-column="38" />
           <folding>
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#li#0;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1104,17 +1112,16 @@
             <element signature="n#style#0;n#span#1;n#li#0;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#li#1;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#li#1;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#li#1;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#textarea#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1523889216432" expanded="true" signature="80:92" ph="..." />
-            <marker date="1523889216432" expanded="true" signature="497:505" ph="..." />
-            <marker date="1523889216432" expanded="true" signature="531:541" ph="..." />
-            <marker date="1523889216432" expanded="true" signature="1231:1232" ph="..." />
-            <marker date="1523889216432" expanded="true" signature="1231:1235" ph="..." />
-            <marker date="1523889216432" expanded="true" signature="1254:1264" ph="..." />
-            <marker date="1523889216432" expanded="true" signature="1425:1443" ph="..." />
-            <marker date="1523889216432" expanded="true" signature="1522:1535" ph="..." />
+            <marker date="1523889575079" expanded="true" signature="80:92" ph="..." />
+            <marker date="1523889575079" expanded="true" signature="497:505" ph="..." />
+            <marker date="1523889575079" expanded="true" signature="531:541" ph="..." />
+            <marker date="1523889575079" expanded="true" signature="1231:1232" ph="..." />
+            <marker date="1523889575079" expanded="true" signature="1231:1235" ph="..." />
+            <marker date="1523889575079" expanded="true" signature="1254:1264" ph="..." />
+            <marker date="1523889575079" expanded="true" signature="1425:1443" ph="..." />
+            <marker date="1523889575079" expanded="true" signature="1522:1535" ph="..." />
           </folding>
         </state>
       </provider>
