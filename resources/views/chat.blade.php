@@ -21,10 +21,11 @@
         var my_name = '{{ $me->name }}';
         var con_name = '{{ $con->name }}';
         var cid = '{{ $con->id }}';
+        var had_warn = 0;
 
         function my_msg(str, time) {
             var list_ele = $('#list');
-            var li_ele = $('<li class="list-group-item pull-right" style="text-align: right;width: 80%;margin-top: 10px;margin-right: 10px;background-color: #5cb85c;border-color: #4cae4c;height: 100%"></li>');
+            var li_ele = $('<div align="right"><li class="list-group-item" style="text-align: right;width: 80%;margin-top: 10px;margin-right: 10px;background-color: #5cb85c;border-color: #4cae4c;"></li></div>');
             var name_ele = $('<span style="color: #1b6d85"></span>');
             name_ele.text(my_name + ' ' + time);
             var msg_ele = $('<br><span style="margin-right: 5px"></span>');
@@ -36,7 +37,7 @@
 
         function new_msg(str, time) {
             var list_ele = $('#list');
-            var li_ele = $('<li class="list-group-item" style="text-align: left;width: 80%;margin-top: 10px;margin-left: 10px;height: 100%"></li>');
+            var li_ele = $('<div><li class="list-group-item" style="width: 80%;margin-top: 10px;margin-left: 10px"></li><div>');
             var name_ele = $('<span style="color: #1b6d85"></span>');
             name_ele.text(con_name + '\t' + time);
             var msg_ele = $('<br><span style="margin-right: 5px"></span>');
@@ -63,7 +64,7 @@
                 },
                 error: function (err) {
                     alert('消息发送失败');
-                    console.log(data);
+                    console.log(err);
                 }
             });
         }
@@ -84,8 +85,8 @@
                     }
                 },
                 error: function (err) {
-                    console.log(err);
-                    alert('发生未知错误，可能无法接收信息');
+                    if (!had_warn) alert('发生未知错误，可能无法接收信息');
+                    had_warn = 1;
                 }
             });
         }
@@ -101,10 +102,12 @@
     <ul class="list-group" id="list">
         @if($msg)
             @foreach($msg as $m)
-                <li class="list-group-item" style="text-align: left;width: 80%;margin-top: 10px;margin-left: 10px;height: 100%">
+                <div>
+                <li class="list-group-item" style="width: 80%;margin-top: 10px;margin-left: 10px">
                     <span style="color: #1b6d85">{{ $m->sender->name }}&emsp;{{ $m->created_at }}</span>
                     <br><span style="margin-left: 5px">{{ $m->content }}</span>
                 </li>
+                </div>
         @endforeach
     @endif
     <!--
