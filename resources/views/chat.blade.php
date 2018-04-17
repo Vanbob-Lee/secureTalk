@@ -19,11 +19,12 @@
     <script>
         var my_id = '{{ $me->id }}';
         var my_name = '{{ $me->name }}';
+        var con_name = '{{ $con->name }}';
         var cid = '{{ $con->id }}';
 
         function my_msg(str, time) {
             var list_ele = $('#list');
-            var li_ele = $('<li class="list-group-item pull-right" style="text-align: right;width: 80%;margin-top: 10px;margin-right: 10px;background-color: #5cb85c;border-color: #4cae4c;"></li>');
+            var li_ele = $('<li class="list-group-item pull-right" style="text-align: right;width: 80%;margin-top: 10px;margin-right: 10px;background-color: #5cb85c;border-color: #4cae4c;height: 100%"></li>');
             var name_ele = $('<span style="color: #1b6d85"></span>');
             name_ele.text(my_name + ' ' + time);
             var msg_ele = $('<br><span style="margin-right: 5px"></span>');
@@ -35,9 +36,9 @@
 
         function new_msg(str, time) {
             var list_ele = $('#list');
-            var li_ele = $('<li class="list-group-item" style="text-align: left;width: 80%;margin-top: 10px;margin-left: 10px"></li>');
-            var name_ele = $('<span style="color: white"></span>');
-            name_ele.text(my_name + '\t' + time);
+            var li_ele = $('<li class="list-group-item" style="text-align: left;width: 80%;margin-top: 10px;margin-left: 10px;height: 100%"></li>');
+            var name_ele = $('<span style="color: #1b6d85"></span>');
+            name_ele.text(con_name + '\t' + time);
             var msg_ele = $('<br><span style="margin-right: 5px"></span>');
             msg_ele.text(str);
             li_ele.append(name_ele);
@@ -77,8 +78,10 @@
                 type: 'post',
                 data: data,
                 success: function(ret) {
-                    for (var i=0;i<ret.length;i++)
+                    for (var i=0;i<ret.length;i++) {
+                        console.log(ret[i]);
                         new_msg(ret[i].content, ret[i].created_at);
+                    }
                 },
                 error: function (err) {
                     console.log(err);
@@ -98,7 +101,7 @@
     <ul class="list-group" id="list">
         @if($msg)
             @foreach($msg as $m)
-                <li class="list-group-item" style="text-align: left;width: 80%;margin-top: 10px;margin-left: 10px">
+                <li class="list-group-item" style="text-align: left;width: 80%;margin-top: 10px;margin-left: 10px;height: 100%">
                     <span style="color: #1b6d85">{{ $m->sender->name }}&emsp;{{ $m->created_at }}</span>
                     <br><span style="margin-left: 5px">{{ $m->content }}</span>
                 </li>
