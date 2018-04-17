@@ -28,7 +28,7 @@ class ViewCtrl extends Controller
         $contacts = DB::table('contacts')
             ->join('users', 'contacts.con_id', 'users.id')
             ->where('user_id', $this->me->id)
-            ->select('contacts.id', 'name', 'head')
+            ->select('contacts.con_id as id', 'name', 'head')
             ->get()->all();
 
         // 未读消息

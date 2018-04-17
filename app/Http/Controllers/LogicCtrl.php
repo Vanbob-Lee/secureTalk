@@ -56,7 +56,7 @@ class LogicCtrl extends Controller
     }
 
     private function receive($req) {
-        $buider = Message::where('recv_id', $req->receiver_id)
+        $buider = Message::where('recv_id', $req->recv_id)
             ->where('sender_id', $req->sender_id)
             ->where('read', 0);
         $msg = $buider->get()->all();

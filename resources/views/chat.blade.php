@@ -35,6 +35,7 @@
 
         function send() {
             var msg = $('#msg').val();
+            $('#msg').val('');
             var data = {
                 sender_id: sid,
                 recv_id: cid,
