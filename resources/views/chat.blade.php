@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="width: 100%;">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Chat with {{ $con->name }}</title>
@@ -7,29 +7,12 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .footer{
-            display:-webkit-box;
-            display:-webkit-flex;
-            display:flex;
-            position:absolute;
-            z-index:500;
-            bottom:0;
-            width:100%;
-            background-color:#F7F7FA;
-        }
-        .weui-tabbar:before{
-            content:" ";
-            position:absolute;
-            left:0;
-            top:0;
-            right:0;
-            height:1px;
-            border-top:1px solid #C0BFC4;
-            color:#C0BFC4;
-            -webkit-transform-origin:0 0;
-            transform-origin:0 0;
-            -webkit-transform:scaleY(0.5);
-            transform:scaleY(0.5);
+        .footer {
+            display: block;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #eee;
         }
     </style>
 
@@ -74,14 +57,15 @@
     </script>
 </head>
 
-<body style="zoom: 3;;width: 100%">
-<ul class="list-group" id="list">
-    @if($msg)
-        @foreach($msg as $m)
-            <li class="list-group-item" style="text-align: left;width: 80%;margin-top: 10px;margin-left: 10px">
-                <span style="color: #1b6d85">{{ $m->sender->name }}</span>
-                <br><span style="margin-left: 5px">{{ $m->content }}</span>
-            </li>
+<body style="zoom: 3;">
+<div style="overflow: scroll;height: 500px">
+    <ul class="list-group" id="list">
+        @if($msg)
+            @foreach($msg as $m)
+                <li class="list-group-item" style="text-align: left;width: 80%;margin-top: 10px;margin-left: 10px">
+                    <span style="color: #1b6d85">{{ $m->sender->name }}</span>
+                    <br><span style="margin-left: 5px">{{ $m->content }}</span>
+                </li>
         @endforeach
     @endif
     <!--
@@ -91,14 +75,12 @@
         <br><span style="font-size: 120%;margin-right: 5px">msg</span>
     </li>
     -->
-</ul>
+    </ul>
+</div>
 
 <div class="footer">
-    <textarea class="form-control" id="msg" style="overflow: hidden;width: 100%;" rows="1"></textarea>
-    <div style="margin-top: 10px">
-        <!--<button class="btn-default btn">聊天记录</button>-->
-        <button class="btn-success btn" onclick="send()">发送</button>
-    </div>
+    <textarea class="form-control" id="msg" style="overflow: hidden;"></textarea>
+    <button class="btn-success btn" onclick="send()">发送</button>
 </div>
 
 </body>
