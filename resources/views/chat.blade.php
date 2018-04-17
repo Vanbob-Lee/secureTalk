@@ -17,15 +17,15 @@
     </style>
 
     <script>
-        var sid = '{{ $me->id }}';
+        var my_id = '{{ $me->id }}';
         var my_name = '{{ $me->name }}';
         var cid = '{{ $con->id }}';
-        var list_ele = $('#list');
 
         function my_msg(str, time) {
+            var list_ele = $('#list');
             var li_ele = $('<li class="list-group-item pull-right" style="text-align: right;width: 80%;margin-top: 10px;margin-right: 10px;background-color: #5cb85c;border-color: #4cae4c;"></li>');
             var name_ele = $('<span style="color: #1b6d85"></span>');
-            name_ele.text(my_name + '&emsp;' + time);
+            name_ele.text(my_name + ' ' + time);
             var msg_ele = $('<br><span style="margin-right: 5px"></span>');
             msg_ele.text(str);
             li_ele.append(name_ele);
@@ -34,9 +34,10 @@
         }
 
         function new_msg(str, time) {
+            var list_ele = $('#list');
             var li_ele = $('<li class="list-group-item" style="text-align: left;width: 80%;margin-top: 10px;margin-left: 10px"></li>');
             var name_ele = $('<span style="color: white"></span>');
-            name_ele.text(my_name + '&emsp;' + time);
+            name_ele.text(my_name + '\t' + time);
             var msg_ele = $('<br><span style="margin-right: 5px"></span>');
             msg_ele.text(str);
             li_ele.append(name_ele);
@@ -48,7 +49,7 @@
             var msg = $('#msg').val();
             $('#msg').val('');
             var data = {
-                sender_id: sid,
+                sender_id: my_id,
                 recv_id: cid,
                 content: msg
             };
@@ -68,8 +69,8 @@
 
         function recv() {
             var data = {
-                sender_id: sid,
-                recv_id: cid,
+                sender_id: cid,
+                recv_id: my_id,
             };
             $.ajax({
                 url: '/logic/receive',
