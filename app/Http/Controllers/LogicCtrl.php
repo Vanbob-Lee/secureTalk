@@ -14,6 +14,8 @@ class LogicCtrl extends Controller
     //
     public function __invoke(Request $req, $part=null)
     {
+        if (!Auth::check())
+            throw new Exception('Not Login');
         return $this->$part($req);
     }
 
@@ -50,6 +52,15 @@ class LogicCtrl extends Controller
 
     private function send_msg($req) {
         $msg = $req->post();
-        //Message::create($msg);
+        Message::create($msg);
+    }
+
+    private function receive($req) {
+        $buider = Message::where('recv_id', $req->receiver_id)
+            ->where('sender_id', $req->sender_id)
+            ->where('read', 0);
+        $msg = $buider->get()->all();
+        $buider->update(['read' => 1]);
+        return $msg;
     }
 }

@@ -54,6 +54,30 @@
                 }
             });
         }
+
+        function recv() {
+            var data = {
+                sender_id: sid,
+                recv_id: cid,
+            };
+            $.ajax({
+                url: '/logic/receive',
+                type: 'post',
+                data: data,
+                success: function(ret) {
+                    for (var i=0;i<ret.length;i++)
+                        my_msg(ret[i]);
+                },
+                error: function (err) {
+                    console.log(err);
+                    alert('发生未知错误，可能无法接收信息');
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            setInterval(recv, 3000);
+        });
     </script>
 </head>
 
@@ -63,7 +87,7 @@
         @if($msg)
             @foreach($msg as $m)
                 <li class="list-group-item" style="text-align: left;width: 80%;margin-top: 10px;margin-left: 10px">
-                    <span style="color: #1b6d85">{{ $m->sender->name }}</span>
+                    <span style="color: #1b6d85">{{ $m->sender->name }}&emsp;{{ $m->created_at }}</span>
                     <br><span style="margin-left: 5px">{{ $m->content }}</span>
                 </li>
         @endforeach
