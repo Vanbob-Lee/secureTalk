@@ -20,12 +20,23 @@
         var sid = '{{ $me->id }}';
         var my_name = '{{ $me->name }}';
         var cid = '{{ $con->id }}';
+        var list_ele = $('#list');
 
-        function my_msg(str) {
-            var list_ele = $('#list');
+        function my_msg(str, time) {
             var li_ele = $('<li class="list-group-item pull-right" style="text-align: right;width: 80%;margin-top: 10px;margin-right: 10px;background-color: #5cb85c;border-color: #4cae4c;"></li>');
+            var name_ele = $('<span style="color: #1b6d85"></span>');
+            name_ele.text(my_name + '&emsp;' + time);
+            var msg_ele = $('<br><span style="margin-right: 5px"></span>');
+            msg_ele.text(str);
+            li_ele.append(name_ele);
+            li_ele.append(msg_ele);
+            list_ele.append(li_ele);
+        }
+
+        function new_msg(str, time) {
+            var li_ele = $('<li class="list-group-item" style="text-align: left;width: 80%;margin-top: 10px;margin-left: 10px"></li>');
             var name_ele = $('<span style="color: white"></span>');
-            name_ele.text(my_name);
+            name_ele.text(my_name + '&emsp;' + time);
             var msg_ele = $('<br><span style="margin-right: 5px"></span>');
             msg_ele.text(str);
             li_ele.append(name_ele);
@@ -46,8 +57,7 @@
                 type: 'post',
                 data: data,
                 success: function(ret) {
-                    //alert(ret);
-                    my_msg(msg);
+                    my_msg(msg, ret);
                 },
                 error: function (err) {
                     alert('消息发送失败');
@@ -67,7 +77,7 @@
                 data: data,
                 success: function(ret) {
                     for (var i=0;i<ret.length;i++)
-                        my_msg(ret[i]);
+                        new_msg(ret[i].content, ret[i].created_at);
                 },
                 error: function (err) {
                     console.log(err);

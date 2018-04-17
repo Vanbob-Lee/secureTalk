@@ -52,7 +52,8 @@ class LogicCtrl extends Controller
 
     private function send_msg($req) {
         $msg = $req->post();
-        Message::create($msg);
+        $obj = Message::create($msg);
+        return $obj->created_at;
     }
 
     private function receive($req) {
