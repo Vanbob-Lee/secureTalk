@@ -50,13 +50,13 @@ class ViewCtrl extends Controller
 
     // 从联系人中点开聊天窗口；或从未读消息中点开
     private function chat($req) {
-        $my_id = $this->me->id;
+        $me = $this->me;
         $con = User::find($req->cid);
         $msg_builder = Message::where('read', 0)
             ->where('recv_id', $this->me->id)
             ->where('sender_id', $con->id);
         $msg = $msg_builder->get()->all();
         //$msg_builder->update(['read' => 1]);
-        return compact('con', 'msg', 'my_id');
+        return compact('con', 'msg', 'me');
     }
 }

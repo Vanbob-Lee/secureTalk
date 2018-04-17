@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Message;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
@@ -16,11 +17,11 @@ class LogicCtrl extends Controller
         return $this->$part($req);
     }
 
-    public function logout() {
+    private function logout() {
         Auth::logout();
     }
 
-    public function edit_info($req) {
+    private function edit_info($req) {
         $info = $req->post();
         $uid = $info['id']; $name = $info['name'];
         unset($info['id'], $info['name']);
@@ -29,7 +30,7 @@ class LogicCtrl extends Controller
         return redirect('/view/index');
     }
 
-    public function add_contact($req) {
+    private function add_contact($req) {
         try {
             DB::table('contacts')->insert(
                 ['user_id' => $req->my_id, 'con_id' => $req->uid]
@@ -40,14 +41,15 @@ class LogicCtrl extends Controller
         }
     }
 
-    public function del_contact($req) {
+    private function del_contact($req) {
         DB::table('contacts')
             ->where('user_id', $req->my_id)
             ->where('con_id', $req->uid)->delete();
         return "已删除";
     }
 
-    public function send_msg($req) {
-
+    private function send_msg($req) {
+        $msg = $req->post();
+        //Message::create($msg);
     }
 }
