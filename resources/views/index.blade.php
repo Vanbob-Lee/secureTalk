@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="height: 100%;">
+<html style="height: 100%;">
 @include('html_head')
 
 <body style="height: 100%;">

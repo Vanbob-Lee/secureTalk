@@ -77,4 +77,22 @@ mark;
         $msg_builder->update(['read' => 1]);
         return compact('con', 'msg', 'me');
     }
+
+    // 与某个联系人的历史记录
+    private function history($req) {
+        $me = $this->me;
+        $con = User::find($req->cid);
+        $msg = Message::where(function($q1) use($con, $me) {
+                $q1->orwhere(function ($q2) use ($con, $me) {
+                    $q2->where('sender_id', $me->id)
+                        ->where('recv_id', $con->id);
+                })->orwhere(function ($q3) use ($con, $me) {
+                    $q3->where('recv_id', $me->id)
+                        ->where('sender_id', $con->id);
+                });
+            })
+            ->orderBy('created_at')
+            ->paginate(10);
+        return compact('con', 'msg', 'me');
+    }
 }

@@ -13,6 +13,25 @@
             bottom: 0;
             width: 100%;
             border-top: 1px solid #eee;
+            background: white;
+        }
+        .my_li {
+            text-align: right;
+            width: 80%;
+            margin-top: 10px;
+            margin-right: 10px;
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+        }
+        .con_li {
+            width: 80%;
+            margin-top: 10px;
+            margin-left: 10px
+        }
+        .btn_serial {
+            margin-top: 5px;
+            margin-left: 20px;
+            margin-bottom: 5px
         }
     </style>
 
@@ -26,7 +45,7 @@
         function my_msg(str, time) {
             var list_ele = $('#list');
             var div = $('<div align="right"></div>');
-            var li_ele = $('<li class="list-group-item" style="text-align: right;width: 80%;margin-top: 10px;margin-right: 10px;background-color: #5cb85c;border-color: #4cae4c;"></li>');
+            var li_ele = $('<li class="list-group-item my_li"></li>');
             var name_ele = $('<span style="color: #1b6d85"></span>');
             name_ele.text(my_name + ' ' + time);
             var msg_ele = $('<br><span style="margin-right: 5px"></span>');
@@ -40,7 +59,7 @@
         function new_msg(str, time) {
             var list_ele = $('#list');
             var div = $('<div></div>');
-            var li_ele = $('<li class="list-group-item" style="width: 80%;margin-top: 10px;margin-left: 10px"></li>');
+            var li_ele = $('<li class="list-group-item con_li"></li>');
             var name_ele = $('<span style="color: #1b6d85"></span>');
             name_ele.text(con_name + '\t' + time);
             var msg_ele = $('<br><span style="margin-right: 5px"></span>');
@@ -84,7 +103,7 @@
                 data: data,
                 success: function(ret) {
                     for (var i=0;i<ret.length;i++) {
-                        console.log(ret[i]);
+                        //console.log(ret[i]);
                         new_msg(ret[i].content, ret[i].created_at);
                     }
                 },
@@ -96,19 +115,23 @@
         }
 
         $(document).ready(function () {
-            setInterval(recv, 3000);
+            var h = window.screen.height;
+            var fh = $('#footer').height();
+            $('#msg_div').css('height', h-fh);
+
+            setInterval(recv, 5000);
         });
     </script>
 </head>
 
 <body style="zoom: 3;">
-<div style="overflow: scroll;height: 500px">
+<div style="overflow: scroll" id="msg_div">
     <ul class="list-group" id="list">
         @if($msg)
             @foreach($msg as $m)
                 <div>
-                <li class="list-group-item" style="width: 80%;margin-top: 10px;margin-left: 10px">
-                    <span style="color: #1b6d85">{{ $m->sender->name }}&emsp;{{ $m->created_at }}</span>
+                <li class="list-group-item con_li">
+                    <span style="color: #1b6d85">{{ $con->name }}&emsp;{{ $m->created_at }}</span>
                     <br><span style="margin-left: 5px">{{ $m->content }}</span>
                 </li>
                 </div>
@@ -117,9 +140,13 @@
     </ul>
 </div>
 
-<div class="footer">
+<div class="footer" id="footer">
     <textarea class="form-control" id="msg" style="overflow: hidden;"></textarea>
-    <button class="btn-success btn" onclick="send()">发送</button>
+    <div class="btn_serial">
+        <a href="/view/history?cid={{ $con->id }}"><img src="/img/history.png" height="10%" width="10%"></a>
+        <a href="/view/info?id={{ $con->id }}"><img src="/img/con_info.png" height="10%" width="10%"></a>
+        <button class="btn-success btn" onclick="send()" id="btn">发送</button>
+    </div>
 </div>
 
 </body>

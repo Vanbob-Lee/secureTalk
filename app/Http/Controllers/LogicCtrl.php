@@ -52,8 +52,9 @@ class LogicCtrl extends Controller
 
     private function send_msg($req) {
         $msg = $req->post();
-        $obj = Message::create($msg);
-        return (string)$obj->created_at;
+        $msg['created_at'] = date('Y-m-d H:i:s');
+        $obj = Message::insert($msg);
+        return (string)$obj['created_at'];
     }
 
     private function receive($req) {
@@ -63,5 +64,20 @@ class LogicCtrl extends Controller
         $msg = $buider->get()->all();
         $buider->update(['read' => 1]);
         return $msg;
+    }
+
+    private function unread($req) {
+        $sql = <<<mark
+select users.id uid, users.name, users.head, content, sub_table.count unread_count
+from users, messages, (
+  select sender_id, max(created_at) maxTime, count(*) `count`
+  from messages where 
+  recv_id = ? and `read` = 0 group by sender_id
+) sub_table
+where sub_table.sender_id = users.id and
+messages.created_at = sub_table.maxTime;
+mark;
+        $messages = DB::select($sql, [$req->id]);
+        return $messages;
     }
 }
