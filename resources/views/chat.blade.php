@@ -5,127 +5,22 @@
     <title>Chat with {{ $con->name }}</title>
     <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .footer {
-            display: block;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            border-top: 1px solid #eee;
-            background: white;
-        }
-        .my_li {
-            text-align: right;
-            width: 80%;
-            margin-top: 10px;
-            margin-right: 10px;
-            background-color: #5cb85c;
-            border-color: #4cae4c;
-        }
-        .con_li {
-            width: 80%;
-            margin-top: 10px;
-            margin-left: 10px
-        }
-        .btn_serial {
-            margin-top: 5px;
-            margin-left: 20px;
-            margin-bottom: 5px
-        }
-    </style>
-
+    <script src="/js/chat.js"></script>
     <script>
         var my_id = '{{ $me->id }}';
         var my_name = '{{ $me->name }}';
         var con_name = '{{ $con->name }}';
         var cid = '{{ $con->id }}';
         var had_warn = 0;
-
-        function my_msg(str, time) {
-            var list_ele = $('#list');
-            var div = $('<div align="right"></div>');
-            var li_ele = $('<li class="list-group-item my_li"></li>');
-            var name_ele = $('<span style="color: #1b6d85"></span>');
-            name_ele.text(my_name + ' ' + time);
-            var msg_ele = $('<br><span style="margin-right: 5px"></span>');
-            msg_ele.text(str);
-            li_ele.append(name_ele);
-            li_ele.append(msg_ele);
-            div.append(li_ele);
-            list_ele.append(div);
-        }
-
-        function new_msg(str, time) {
-            var list_ele = $('#list');
-            var div = $('<div></div>');
-            var li_ele = $('<li class="list-group-item con_li"></li>');
-            var name_ele = $('<span style="color: #1b6d85"></span>');
-            name_ele.text(con_name + '\t' + time);
-            var msg_ele = $('<br><span style="margin-right: 5px"></span>');
-            msg_ele.text(str);
-            li_ele.append(name_ele);
-            li_ele.append(msg_ele);
-            div.append(li_ele);
-            list_ele.append(div);
-        }
-
-        function send() {
-            var msg = $('#msg').val();
-            $('#msg').val('');
-            var data = {
-                sender_id: my_id,
-                recv_id: cid,
-                content: msg
-            };
-            $.ajax({
-                url: '/logic/send_msg',
-                type: 'post',
-                data: data,
-                success: function(ret) {
-                    my_msg(msg, ret);
-                },
-                error: function (err) {
-                    alert('消息发送失败');
-                    console.log(err);
-                }
-            });
-        }
-
-        function recv() {
-            var data = {
-                sender_id: cid,
-                recv_id: my_id,
-            };
-            $.ajax({
-                url: '/logic/receive',
-                type: 'post',
-                data: data,
-                success: function(ret) {
-                    for (var i=0;i<ret.length;i++) {
-                        //console.log(ret[i]);
-                        new_msg(ret[i].content, ret[i].created_at);
-                    }
-                },
-                error: function (err) {
-                    if (!had_warn) alert('发生未知错误，可能无法接收信息');
-                    had_warn = 1;
-                }
-            });
-        }
-
-        $(document).ready(function () {
-            var h = window.screen.height;
-            var fh = $('#footer').height();
-            $('#msg_div').css('height', h-fh);
-
-            setInterval(recv, 5000);
-        });
     </script>
+
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/chat.css" rel="stylesheet">
 </head>
 
 <body style="zoom: 3;">
-<div style="overflow: scroll" id="msg_div">
+
+<div style="overflow: scroll;width: 100%" id="msg_div">
     <ul class="list-group" id="list">
         @if($msg)
             @foreach($msg as $m)
@@ -142,10 +37,11 @@
 
 <div class="footer" id="footer">
     <textarea class="form-control" id="msg" style="overflow: hidden;"></textarea>
-    <div class="btn_serial">
-        <a href="/view/history?cid={{ $con->id }}"><img src="/img/history.png" height="10%" width="10%"></a>
-        <a href="/view/info?id={{ $con->id }}"><img src="/img/con_info.png" height="10%" width="10%"></a>
-        <button class="btn-success btn" onclick="send()" id="btn">发送</button>
+    <div class="btn_div">
+        <a href="/view/index" class="btn_serial"><-</a>
+        <a href="/view/history?cid={{ $con->id }}" class="btn_serial"><img src="/img/history.png" height="10%" width="10%"></a>
+        <a href="/view/info?id={{ $con->id }}" class="btn_serial"><img src="/img/con_info.png" height="10%" width="10%"></a>
+        <button class="btn-success btn btn_serial" onclick="send()" id="btn">发送</button>
     </div>
 </div>
 

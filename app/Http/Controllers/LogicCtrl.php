@@ -52,9 +52,8 @@ class LogicCtrl extends Controller
 
     private function send_msg($req) {
         $msg = $req->post();
-        $msg['created_at'] = date('Y-m-d H:i:s');
-        $obj = Message::insert($msg);
-        return (string)$obj['created_at'];
+        $obj = Message::create($msg);
+        return (string)$obj->created_at;
     }
 
     private function receive($req) {
