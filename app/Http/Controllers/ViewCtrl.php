@@ -95,4 +95,10 @@ mark;
             ->paginate(10);
         return compact('con', 'msg', 'me');
     }
+
+    private function hide($req) {
+        $my_id = $this->me->id;
+        $cid = $req->cid;
+        return compact('my_id', 'cid');
+    }
 }

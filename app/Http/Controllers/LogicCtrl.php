@@ -9,6 +9,8 @@ use DB;
 use Exception;
 use App\User;
 
+include_once app_path().'/Tools/hide_img.php';
+
 class LogicCtrl extends Controller
 {
     //
@@ -78,5 +80,37 @@ messages.created_at = sub_table.maxTime;
 mark;
         $messages = DB::select($sql, [$req->id]);
         return $messages;
+    }
+
+    private function upload_pic($req) {
+        $p = 'app/'.$req->pic->store('img');
+        $path = storage_path($p);
+        $info = pathinfo($p);
+        $ext = $info['extension']; $fname = $info['filename'];
+
+        if ($ext == 'jpg') $ext = 'jpeg';
+        $func = 'imagecreatefrom'.$ext;
+        $im = $func($path);  // 打开图片
+
+        if ($ext != 'png') {  // 格式转化
+            $p = '/app/img/'.$fname.'.png';  // 构造新文件名
+            $path = storage_path($p);
+            imagepng($im, $path);  // 重新保存
+        }
+
+        $sx = imagesx($im); $sy = imagesy($im);
+        $len = (int)(($sx * $sy - 1) * 3 / 8);
+        imagedestroy($im);
+        return compact('p', 'len');
+    }
+
+    private function hide($req) {
+        return hide_img(
+            storage_path($req->path), $req->msg
+        );
+    }
+
+    private function decode($req) {
+        return get_info(storage_path($req->path));
     }
 }

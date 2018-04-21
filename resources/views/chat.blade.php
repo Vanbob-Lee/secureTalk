@@ -2,10 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Chat with {{ $con->name }}</title>
+    <title>与 {{ $con->name }} 的聊天</title>
     <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/chat.js"></script>
+
     <script>
         var my_id = '{{ $me->id }}';
         var my_name = '{{ $me->name }}';

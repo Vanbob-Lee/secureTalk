@@ -16,7 +16,7 @@ Route::get('/', function () {
     return redirect('/login');
 });
 Route::get('/test', function() {
-    \App\User::find(2)->update(['info'=>'abc', 'name'=>'vb love guang']);
+
 });
 Route::get('/view/{part}', 'ViewCtrl');
 Route::post('/logic/{part}', 'LogicCtrl');

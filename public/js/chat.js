@@ -78,9 +78,10 @@ $(document).ready(function () {
     var h = window.screen.height;
     var fh = $('#footer').height();
     var msg_div = $('#msg_div');
-    var float_div = $('.float_div');
     msg_div.css('height', h - fh);
 
+    /* 悬浮按钮
+    var float_div = $('.float_div');
     float_div.click(function () {
         window.location = '/view/index';
     });
@@ -89,6 +90,6 @@ $(document).ready(function () {
         if (d > 30) float_div.css('display', 'block');
         if (d < 10) float_div.css('display', 'none');
     });
-
+    */
     setInterval(recv, 5000);
 });
