@@ -16,8 +16,10 @@ class LogicCtrl extends Controller
     //
     public function __invoke(Request $req, $part=null)
     {
-        if (!Auth::check())
+        $api = ['upload_pic', 'hide', 'decode'];
+        if (!Auth::check() && !in_array($part, $api))
             throw new Exception('Not Login');
+
         return $this->$part($req);
     }
 
