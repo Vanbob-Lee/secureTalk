@@ -1,6 +1,7 @@
 function upload() {
     var form = new FormData();
     var pic = $('#pic')[0].files[0];
+    if (pic == null) return;
     form.append('pic', pic);
     $.ajax({
         url: '/logic/upload_pic',
