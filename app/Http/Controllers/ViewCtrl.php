@@ -97,7 +97,9 @@ mark;
     }
 
     private function hide($req) {
-        $my_id = $this->me->id;
+        if ($this->me)
+            $my_id = $this->me->id;
+        else $my_id = null;
         $cid = $req->cid;
         return compact('my_id', 'cid');
     }

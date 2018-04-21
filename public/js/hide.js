@@ -33,9 +33,11 @@ function hide() {
         },
         success: function (ret) {
             alert(ret.msg);
-            shr.attr('disabled', false);
-            shr.removeClass('btn-disabled');
-            shr.addClass('btn-success');
+            if (my_id && cid) {
+                shr.attr('disabled', false);
+                shr.removeClass('btn-disabled');
+                shr.addClass('btn-success');
+            }
             $('#img_get').attr('src', '/view/show_pic?path=' + p);
         },
         err: function (err) {
