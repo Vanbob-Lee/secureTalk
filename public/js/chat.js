@@ -2,9 +2,9 @@ function my_msg(str, time) {
     var list_ele = $('#list');
     var div = $('<div align="right"></div>');
     var li_ele = $('<li class="list-group-item my_li"></li>');
-    var name_ele = $('<span style="color: #1b6d85"></span>');
+    var name_ele = $('<p style="color: white"></p>');
     name_ele.text(my_name + ' ' + time);
-    var msg_ele = $('<br><span style="margin-right: 5px"></span>');
+    var msg_ele = $('<span style="margin-right: 5px"></span>');
     msg_ele.text(str);
     li_ele.append(name_ele);
     li_ele.append(msg_ele);
@@ -16,9 +16,9 @@ function new_msg(str, time) {
     var list_ele = $('#list');
     var div = $('<div></div>');
     var li_ele = $('<li class="list-group-item con_li"></li>');
-    var name_ele = $('<span style="color: #1b6d85"></span>');
+    var name_ele = $('<p style="color: #1b6d85"></p>');
     name_ele.text(con_name + '\t' + time);
-    var msg_ele = $('<br><span style="margin-right: 5px"></span>');
+    var msg_ele = $('<span style="margin-right: 5px"></span>');
     msg_ele.text(str);
     li_ele.append(name_ele);
     li_ele.append(msg_ele);

@@ -27,8 +27,8 @@
             @foreach($msg as $m)
                 <div>
                 <li class="list-group-item con_li">
-                    <span style="color: #1b6d85">{{ $con->name }}&emsp;{{ $m->created_at }}</span>
-                    <br><span style="margin-left: 5px">{{ $m->content }}</span>
+                    <p style="color: #1b6d85">{{ $con->name }}&emsp;{{ $m->created_at }}</p>
+                    <span style="margin-left: 5px">{{ $m->content }}</span>
                 </li>
                 </div>
         @endforeach
@@ -39,10 +39,11 @@
 <div class="footer" id="footer">
     <textarea class="form-control" id="msg" style="overflow: hidden;"></textarea>
     <div class="btn_div">
-        <a href="/view/index" class="btn_serial"><-</a>
-        <a href="/view/history?cid={{ $con->id }}" class="btn_serial"><img src="/img/history.png" height="10%" width="10%"></a>
-        <a href="/view/info?id={{ $con->id }}" class="btn_serial"><img src="/img/con_info.png" height="10%" width="10%"></a>
-        <button class="btn-success btn btn_serial" onclick="send()" id="btn">发送</button>
+        <a href="/view/index" class="btn_serial"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a href="/view/history?cid={{ $con->id }}" class="btn_serial"><span class="glyphicon glyphicon-time"></span></a>
+        <a href="/view/info?id={{ $con->id }}" class="btn_serial"><span class="glyphicon glyphicon-user"></span></a>
+        <a href="/view/hide?cid={{ $con->id }}" class="btn_serial"><span class="glyphicon glyphicon-picture"></span></a>
+        <button class="btn-success btn" onclick="send()" id="btn" style="margin-left: 20px">发送</button>
     </div>
 </div>
 

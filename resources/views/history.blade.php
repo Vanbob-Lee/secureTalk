@@ -24,6 +24,9 @@
         body {
             zoom: 3;
         }
+        span {
+            word-wrap: break-word;
+        }
     </style>
 
     <script>
@@ -40,15 +43,15 @@
             @if ($m->sender_id == $con->id)
                 <div>
                     <li class="list-group-item con_li">
-                        <span style="color: #1b6d85">{{ $con->name }}&emsp;{{ $m->created_at }}</span>
-                        <br><span style="margin-left: 5px">{{ $m->content }}</span>
+                        <p style="color: #1b6d85">{{ $con->name }}&emsp;{{ $m->created_at }}</p>
+                        <span style="margin-left: 5px">{{ $m->content }}</span>
                     </li>
                 </div>
             @else
                 <div align="right">
                     <li class="list-group-item my_li">
-                        <span style="color: #1b6d85">{{ $me->name }}&emsp;{{ $m->created_at }}</span>
-                        <br><span style="margin-right: 5px">{{ $m->content }}</span>
+                        <p style="color: white">{{ $me->name }}&emsp;{{ $m->created_at }}</p>
+                        <span style="margin-right: 5px">{{ $m->content }}</span>
                     </li>
                 </div>
             @endif

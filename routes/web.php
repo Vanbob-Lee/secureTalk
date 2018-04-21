@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('/test', function() {
 
 });
+Route::get('/view/show_pic', 'ViewCtrl@show_pic');
 Route::get('/view/{part}', 'ViewCtrl');
 Route::post('/logic/{part}', 'LogicCtrl');
 

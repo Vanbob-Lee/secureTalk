@@ -21,24 +21,28 @@ function upload() {
 }
 
 function hide() {
+    var p = $('#path').val();
+    var shr = $('#share');
     $.ajax({
         url: '/logic/hide',
         type: 'post',
         data: {
-            path: $('#path').val(),
+            path: p,
             msg: $('#msg').val()
         },
         success: function (ret) {
             alert(ret.msg);
-            $('#send').removeAttr('disable');
-            $('#gener').removeClass('btn-disabled');
-            $('#gener').addClass('btn-success');
+            shr.attr('disabled', false);
+            shr.removeClass('btn-disabled');
+            shr.addClass('btn-success');
+            $('#img_get').attr('src', '/view/show_pic?path=' + p);
         },
         err: function (err) {
             alert('隐写失败');
-            $('#send').attr('disable', 'disable');
-            $('#gener').removeClass('btn-success');
-            $('#gener').addClass('btn-disabled');
+            shr.attr('disable', 'disable');
+            shr.removeClass('btn-success');
+            shr.addClass('btn-disabled');
+            $('#img_get').removeAttribute('src');
             console.log(err);
         }
     });
@@ -58,6 +62,29 @@ function decode() {
         },
         err: function (err) {
             alert('解析失败');
+            console.log(err);
+        }
+    });
+}
+
+function share() {
+    var host = window.location.host;
+    var route = $('#img_get').attr('src');
+    var msg = '[隐写图片] 请打开链接查看：' + host + route;
+    var data = {
+        sender_id: my_id,
+        recv_id: cid,
+        content: msg
+    };
+    $.ajax({
+        url: '/logic/send_msg',
+        type: 'post',
+        data: data,
+        success: function(ret) {
+            alert('发送成功。可到聊天记录中查看');
+        },
+        error: function (err) {
+            alert('消息发送失败');
             console.log(err);
         }
     });

@@ -101,4 +101,13 @@ mark;
         $cid = $req->cid;
         return compact('my_id', 'cid');
     }
+
+    public function show_pic(Request $req) {
+        $im = imagecreatefrompng(storage_path($req->path));
+        ob_start();
+        imagepng($im);
+        $content = ob_get_contents();
+        return response($content, 200)
+            ->header('content-type', 'image/png');
+    }
 }
