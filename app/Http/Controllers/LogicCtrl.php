@@ -101,7 +101,7 @@ mark;
         }
 
         $sx = imagesx($im); $sy = imagesy($im);
-        $len = (int)(($sx * $sy - 1) * 3 / 8);
+        $len = (int)(($sx * $sy - 1) / 8);
         imagedestroy($im);
         return compact('p', 'len');
     }

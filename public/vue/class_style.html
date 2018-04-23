@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+</head>
+<body>
+
+<div
+    id="class_bind"
+    class="static"
+    :class="class_obj"
+>
+</div>
+
+<div
+    id="arr_bind"
+    :class="[actClass, errClass]"
+>
+</div>
+
+<div
+        id="css_bind"
+        :style="css_obj"
+>
+</div>
+<!--也支持数组语法-->
+
+<div id="v_if">
+    <p v-if="ok">Yes</p>
+    <p v-else>No</p>
+
+    <!--
+因为 v-if 是一个指令，所以必须将它添加到一个元素上。但是如果想切换多个元素呢？此时可以把一个 <template> 元素当做不可见的包裹元素
+-->
+    <template v-if="show_templ">
+        <h1>Title</h1>
+        <p>Paragraph</p>
+    </template>
+
+    <div v-if="type === 'A'">
+        <h1>Title A</h1>
+        <p>Paragraph A</p>
+    </div>
+    <div v-else-if="type === 'B'">
+        B
+    </div>
+    <div v-else>
+        Not A/B, Probably C
+    </div>
+
+    <!--
+    用key管理可复用的元素
+    添加key来告诉vue 两个input是独立的 不要复用
+    （切换后不要保留原来的输入内容）
+    -->
+    <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username" key="username-input">
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address" key="email-input">
+    </template>
+
+    <!--
+    相比之下，v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。
+    -->
+    <p v-show="display">Display or None</p>
+</div>
+
+<div id="list_render">
+    <ul>
+        <li v-for="item in list">
+            {{ item }}
+        </li>
+    </ul>
+
+    <!--在v-for块中，我们拥有对父作用域属性的完全访问权限-->
+    <ul>
+        <li v-for="(item, idx) in list">
+            {{ parent }} - {{ idx }} - {{ item }}
+        </li>
+    </ul>
+
+    <ul>
+        <li v-for="(val, key, idx) in obj">
+            {{ idx }}.{{ key }}: {{ val }}
+        </li>
+    </ul>
+
+    <!--
+    为了给 Vue 一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 key 属性。
+    -->
+    <ul>
+        <li v-for="item in obj_list" :key="item.id">
+            {{ item.name }}
+        </li>
+    </ul>
+
+    <!--
+    利用索引改变数组的值时，不能触发Vue更新
+    使用：Vue.set(app.arr, idx, newVal) vm.$set
+
+    对于已经创建的实例，Vue 不能动态添加根级别的响应式属性。但是，可以使用 Vue.set(object, key, value) 方法向嵌套对象添加响应式属性。
+
+    增加多个新属性
+    vm.userProfile = Object.assign({}, vm.userProfile, {
+      age: 27,
+      favoriteColor: 'Vue Green'
+    })
+    -->
+
+    <!--筛选 排序 整数范围-->
+    <ul>
+        <li v-for="i in evenNum">{{ i }}</li>
+    </ul>
+    <ul>
+        <li v-for="i in sorted">{{ i }}</li>
+    </ul>
+    <ul>
+        <li v-for="i in 5">{{ i }}</li>
+    </ul>
+
+    <ol>
+        <template v-for="item in obj_list">
+            <li>{{ item.id }}</li>
+            <li class="divider">{{ item.name }}</li>
+        </template>
+    </ol>
+
+    <!--
+    v-for的优先级比v-if更高，
+    v-if将分别重复运行于每个v-for循环中
+    -->
+    <ul>
+        <li v-for="todo in todos" v-if="!todo.complete">
+            {{ todo }} <!--竟然可以直接显示对象-->
+        </li>
+    </ul>
+
+    <ul v-if="todos.length">
+        <li v-for="todo in todos">
+            {{ todo }}
+        </li>
+    </ul>
+    <p v-else>No todos left!</p>
+</div>
+
+<div id="todo_example">
+    <input
+        v-model="newTodoText"
+        @keyup.enter = 'addNewTodo'
+        placeholder="Add a todo"
+    >
+    <ul>
+        <!--
+        1. is="comp_name"的效果与<comp_name>相同
+        但兼容性更强
+
+        2.在组件中使用 v-for 时，key是必须的
+
+        3. 不自动将 item 注入到组件里的原因是，这会使得组件与 v-for 的运作紧密耦合？
+
+        4. splice(idx, n) 要删除项目的起始索引，要删除的项目的个数
+        -->
+        <li
+            is="todo-item"
+            v-for="(todo, idx) in todos"
+            :key="todo.id"
+            :title="todo.title"
+            @remove="todos.splice(idx, 1)"
+        ></li>
+    </ul>
+</div>
+
+</body>
+
+<script>
+    Vue.component('todo-item', {
+        props: ['title'],
+        template: '<li>{{ title }}<button @click="$emit(\'remove\')">X</button></li>'
+    });
+    var app6 = new Vue({
+        el: '#todo_example',
+        data: {
+            newTodoText: '',
+            todos: [
+                { title: 'eat', id: 0 },
+                { title: 'sleep', id: 1 },
+                { title: 'coding', id: 2 }
+            ],
+            nextId: 4
+        },
+        methods: {
+            addNewTodo: function () {
+                this.todos.push({
+                    id: this.nextId++,
+                    title: this.newTodoText
+                });
+                this.newTodoText = '';
+            }
+        }
+    });
+
+    var app5 = new Vue({
+        el: '#list_render',  // 不一定要是div
+        data: {
+            parent: 'Parent',
+            list: ['Foo', 'Bar'],
+            obj: {
+                name: 'Vanbob',
+                partner: 'FF'
+            },
+            obj_list: [
+                { id:0, name:'Vanbob' },
+                { id:1, name:'Guang' }
+            ],
+            num: [1,2,3,4,5,6],
+            todos: [
+                { name:'eat', complete:0 },
+                { name:'sleep', complete:1 }
+            ]
+        },
+
+        computed: {
+            evenNum: function () {
+                return this.num.filter(function (val) {
+                    return val%2 === 0;  // 符合此条件的留下
+                });
+            },
+            sorted: function () {
+                var temp = this.num.slice();
+                //temp.sort();
+                temp.sort(function (a, b) {
+                    return b>a;
+                });
+                return temp;
+            }
+        }
+    });
+
+    // 在控制台访问属性时，记得加上app.
+    var app4 = new Vue({
+        el: '#v_if',
+        data: {
+            ok: 1,
+            show_templ: 1,
+            type: 'B',
+            loginType: 'email',
+            display: 1
+        }
+    });
+
+    var app3 = new Vue({
+        el: '#css_bind',
+        data: {
+            css_obj: {
+                color: 'red',
+                'text-align': 'right'
+            }
+        }
+    });
+
+    var app2 = new Vue({
+        el: '#arr_bind',
+        data: {
+            actClass: 'active',
+            errClass: 'text-danger'
+        }
+    });
+
+    var app1 = new Vue({
+        el: '#class_bind',
+        data: {
+            isAct: true,
+            err: null
+        },
+        computed: {
+            class_obj: function () {
+                return {
+                    active: this.isAct && !this.err,
+
+                    // 必须加单引号，js对象的键不能有特殊符号
+                    'text-danger': this.err && this.err.type === 'fatal'
+                };
+            }
+        }
+    });
+</script>
+</html>

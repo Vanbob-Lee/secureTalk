@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+</head>
+<body>
+<div id="example">
+    <!--直接输入js表达式-->
+    <button @click="cnt += 1">bnt</button>
+    <p>counter: {{ cnt }}</p>
+
+    <!--调用方法：只输入函数名(可以注入event)-->
+    <input v-model="name">
+    <button @click="greet">greet</button>
+
+    <!--像js一样带参数调用 手动注入事件$event-->
+    <form action="http://baidu.com">
+        <input placeholder="test" name="in">
+        <button v-on:click="warn('not submit', $event)">
+            Submit
+        </button>
+    </form>
+</div>
+
+<!--
+事件修饰符 @action.decorator
+阻止单击事件继续传播
+<a v-on:click.stop="doThis"></a>
+
+提交事件不再重载页面
+<form v-on:submit.prevent="onSubmit"></form>
+
+修饰符可以串联
+<a v-on:click.stop.prevent="doThat"></a>
+
+只有修饰符
+<form v-on:submit.prevent></form>
+
+添加事件监听器时使用事件捕获模式
+即元素自身触发的事件先在此处处理，然后才交由内部元素进行处理
+<div v-on:click.capture="doThis">...</div>
+
+只当在 event.target 是当前元素自身时触发处理函数
+即事件不是从内部元素触发的
+<div v-on:click.self="doThat">...</div>
+
+点击事件将只会触发一次
+<a v-on:click.once="doThis"></a>
+
+按键修饰符：@keyup.enter
+-->
+
+<!--
+表单操作
+v-model 会忽略所有表单元素的 value、checked、selected 特性的初始值而总是将 Vue 实例的数据作为数据来源。你应该通过 JavaScript 在组件的 data 选项中声明初始值。
+-->
+<form id="test_form">
+    <span>Multiline message is:</span>
+    <p style="white-space: pre-line;">{{ msg }}</p>
+    <br>
+
+    <!--绑定vm后 在<tx></tx>之间插值就没有效果了-->
+    <textarea v-model="msg" placeholder="add multiple lines">abc</textarea>
+
+    <input type="checkbox" v-model="chk" id="chk_ele">
+    <label for="chk_ele">{{ chk }}</label>
+    <br>
+
+    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <br>
+    <span>Checked names: {{ checkedNames }}</span>
+    <br>
+
+    <!--例子修改-->
+    <template v-for="name in checkedNames">
+        <input type="checkbox" :id="name" :value="name">
+        <label :for="name">{{ name }}</label>
+    </template>
+    Checked names:
+    <ul>
+        <li v-for="name in checkedNames">{{ name }}</li>
+    </ul>
+</form>
+</body>
+
+<script>
+    var app2 = new Vue({
+       el: '#test_form',
+       data: {
+           msg: '',
+           chk: false,
+           checkedNames: [],
+           names: ['Jack', 'John', 'Mike']
+       }
+    });
+    var app = new Vue({
+        el: '#example',
+        data: {
+            cnt: 0,
+            name: ''
+        },
+        methods: {
+            greet: function (e) {
+                alert('Hello, ' + this.name);
+                // 触发事件的原对象的标签名
+                console.log(e.target.tagName);
+            },
+            warn: function (msg, e) {
+                if (e) e.preventDefault();  // 阻止默认操作（表单中有指定了name的input时 点击按钮会跳转）
+                alert(msg);
+            }
+        }
+    });
+    // app.greet(); 也可直接调用
+</script>
+</html>

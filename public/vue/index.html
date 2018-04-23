@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script></script>
+</head>
+<body>
+<div id="app">
+    {{ message }}
+</div>
+
+<div id="app-2">
+    <!--将这个元素节点的 title 特性和 Vue 实例的 message 属性保持一致-->
+    <span v-bind:title="message">查看绑定</span>
+</div>
+
+<div id="app-3">
+    <p v-if="seen">now you see me</p>
+</div>
+
+<div id="app4">
+    <ol>
+        <!--注意v-for是对自身的循环 把循环放在li 而不是ol-->
+        <li v-for="todo in todos">
+            {{ todo }}
+        </li>
+    </ol>
+</div>
+
+<div id="app5">
+    <p>{{ msg }}</p>
+    <p>Func Reverse: {{ func_revs }}</p>
+
+    <!--计算属性有缓存机制 不会每次求值-->
+    <p>Compute Reverse: {{ compute_revs }}</p>
+
+    <!-- v-on是事件监听器 -->
+    <button v-on:click="reverse">逆转</button>
+</div>
+
+<div id="app-6">
+    <p>{{ msg }}</p>
+    <input v-model="msg">
+</div>
+
+<div id="app7">
+    <ol>
+        <!-- <tod-item>的key属性与item.id绑定 但其序号还是ol分配的序号-->
+        <todo-item
+            v-for="item in list"
+            v-bind:todo="item"
+            v-bind:key="item.id"
+        >
+        </todo-item>
+    </ol>
+</div>
+
+<div id="template">
+    <p v-once>Msg: {{ msg }}</p><!--一次性插值-->
+    <p v-html>{{ rawHtml }}</p><!--错误写法-->
+    <p v-html="rawHtml"></p><!--正确-->
+
+    <!--语法不能作用在 HTML 特性上，遇到这种情况应该使用 v-bind 指令-->
+    <span id="{{ id }}">Wrong</span>
+    <span v-bind:id="id">Right</span>
+    <button v-bind:disabled="useless">bnt</button>
+
+    <!--所有的数据绑定（大括号内的绑定 或者各种bind） 都支持一个js表达式（注意 不是语句） 表达式中只能访问部分全局变量-->
+    <p>{{ msg + 'world' }}</p>
+    <span v-bind:id=" 'text_'+id "></span>
+
+    <!--
+    v-为前缀的属性都是指令
+    指令后是参数 如 v-bind:href, v-on:click
+    v-bind: 缩写为 :
+    v-on: 缩写为 @
+    -->
+</div>
+
+<div id="demo">{{ fullName }}</div>
+</body>
+
+<script>
+    // demo-version1: 使用监听器
+    var vm = new Vue({
+        el: '#demo',
+        data: {
+            firstName: 'Foo',
+            lastName: 'Bar',
+            fullName: 'Foo Bar'
+        },
+        watch: {
+            firstName: function (val) {
+                this.fullName = val + ' ' + this.lastName
+            },
+            lastName: function (val) {
+                this.fullName = this.firstName + ' ' + val
+            }
+        }
+    });
+
+    // demo-version1: 使用计算属性
+    var vm = new Vue({
+        el: '#demo',
+        data: {
+            firstName: 'Foo',
+            lastName: 'Bar'
+        },
+        computed: {
+            fullName: function () {
+                return this.firstName + ' ' + this.lastName
+            },
+
+            // 计算属性默认只有 getter ，不过在需要时你也可以提供一个 setter
+            fullName2: {
+                get: function () {
+                    return 'fullName_example';
+                },
+                set: function (new_val) {
+                    alert('setting fullName2');
+                }
+            }
+        }
+    });
+
+    var templ = new Vue({
+        el: '#template',
+        data: {
+            msg: 'hello',
+            rawHtml: '<span style="color: red">This is Red</span>',
+            id: 'testId',
+            useless: null
+        }
+    });
+    // 每个Vue对象就是一个view model 简称vm
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        }
+    });
+    var app2 = new Vue({
+        el: '#app-2',
+        data: {
+            message: 'Page Loaded at: ' + new Date().toLocaleString()
+        }
+    });
+    var app3 = new Vue({
+        el: '#app-3',
+        data: {
+            seen: true
+        }
+    });
+    var app4 = new Vue({
+        el: '#app4',
+        data: {
+            todos: ['js', 'vue', 'projects']
+        }
+    });
+
+    // app5.attr = app5.data.attr
+    /* 当一个 Vue 实例被创建时，它向 Vue 的响应式系统中加入了其 data 对象中能找到的所有的属性。
+
+    只有当实例被创建时 data 中存在的属性才是响应式的，新添加的属性不是。
+
+    Object.freeze(data)  阻止修改现有的属性
+
+    data中的属性是vm的数据属性
+    其他属性：
+    如el，是vm的实例属性
+    如created，是实例方法？
+    vm.$data === data
+    vm.$el === document.getElementById('el_id')
+
+
+    */
+    var app5 = new Vue({
+        el: '#app5',
+        data: {
+            msg: 'hello'
+        },
+
+        methods: {
+            reverse: function () {
+                // this指向vm实例(app5)
+                this.msg = this.msg.split('').reverse().join('');
+            },
+            func_reverse: function () {
+                // this指向vm实例(app5)
+                return this.msg.split('').reverse().join('');
+            }
+        },
+
+        // 计算属性
+        computed: {
+            compute_revs: function () {
+                return this.msg.split('').reverse().join('');
+            }
+        }
+    });
+
+    var app6 = new Vue({
+        el: '#app-6',
+        data: {
+            msg: 'hello'
+        },
+        created: function () {
+            // 生命周期钩子created: 在一个实例被创建之后执行
+            console.log('vm instance "app6" has created');
+        }
+    });
+
+    Vue.component('todo-item', {
+        props: ['todo'],  // 为todo-item追加一个“属性”
+        template: '<li>{{ todo.text }}</li>'
+    });
+    var app7 = new Vue({
+        el: '#app7',
+        data: {
+            list: [
+                { id: 0, text: 'todo1' },
+                { id: 3, text: 'todo2' },
+                { id: 6, text: 'todo3' }
+            ]
+        }
+    })
+</script>
+</html>
