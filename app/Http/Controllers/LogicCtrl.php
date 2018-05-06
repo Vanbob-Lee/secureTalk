@@ -13,13 +13,13 @@ include_once app_path().'/Tools/hide_img.php';
 
 class LogicCtrl extends Controller
 {
+    private $p = 11, $q = 13;
     //
     public function __invoke(Request $req, $part=null)
     {
         $api = ['upload_pic', 'hide', 'decode'];
         if (!Auth::check() && !in_array($part, $api))
             throw new Exception('Not Login');
-
         return $this->$part($req);
     }
 
