@@ -8,7 +8,7 @@
     <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
     <script src="/js/index.js"></script>
     <script>
-        var my_id = '{{ Auth::user()->id or '' }}';
+        var my_id = '{{ Auth::user()?Auth::user()->id:'' }}';
     </script>
 </head>
 
