@@ -1,5 +1,5 @@
 <div class="weui-cells" style="margin-top: 0px;" id="cells">
-    @if($messages && count($messages))
+    @if(count($messages))
         <div class="weui-cell" id="msg_list">
         @foreach($messages as $msg)
             <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">

@@ -22,7 +22,7 @@ class ViewCtrl extends Controller
     /*以下所有private函数，取得试图所需要的数据*/
 
     private function index() {
-        if (!$this->me) return [];
+        if (!$this->me) return ['messages'=>null];
 
         // 通讯录
         $contacts = DB::table('contacts')
