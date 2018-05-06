@@ -102,7 +102,7 @@ if ($me)
             url: '/logic/logout',
             data: { id: id },
             type: 'post',
-            success: function () {
+            success: function (ret) {
                 alert('您已退出登陆');
                 window.location.href = '/login';
             }

@@ -25,6 +25,7 @@ class LogicCtrl extends Controller
 
     private function logout() {
         Auth::logout();
+        return 1;
     }
 
     private function edit_info($req) {
