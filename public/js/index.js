@@ -16,16 +16,17 @@ function switchTo(name) {
     }
 }
 
+var sum_unread = 0;
+
 // 获取未读消息列表
 function unread() {
     $.ajax({
         url: '/logic/unread',
         type: 'post',
-        data: { id: '{{ Auth::user()->id }}'},
+        data: { id: my_id },
         success: function (ret) {
-            console.log(ret);
             $('#msg_list').remove();  // 删除旧列表
-
+            $('#point').remove();
             if (ret.length) {
                 $('#tip').remove();
             } else {
@@ -40,9 +41,15 @@ function unread() {
             for(var i=0;i<ret.length;i++) {
                 aLine(list, ret[i]);
             }
+            // 直接append(html_str)也可以，不一定要加$()
+            // 但加了$()能直接获取到这个jq对象
+            var red_point = $('<span class="weui-badge" style="position: absolute;margin-left: -5px" id="point"></span>');
+            red_point.text(sum_unread);
+            $('#msg_icon').after(red_point);
             $('#cells').append(list);
         }
     });
+    sum_unread = 0;
 }
 
 function aLine(list, line) {
@@ -53,6 +60,7 @@ function aLine(list, line) {
     }
     var count = $('<span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;"></span>');
     count.text(line.unread_count);
+    sum_unread += line.unread_count;
     div_left.append(head);
     div_left.append(count);
 
