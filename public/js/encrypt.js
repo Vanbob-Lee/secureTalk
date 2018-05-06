@@ -37,7 +37,7 @@ function process(message, con_id) {
     var enc_msg_sign = encryptByDES(JSON.stringify(msg_sign), ks);
 
     $.ajax({
-        url: '/logic/get_pub_key',
+        url: '/open/get_pub_key',
         async: false,
         data: { id: con_id },
         success: function (ret) {

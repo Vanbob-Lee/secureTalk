@@ -33,10 +33,11 @@ function send() {
         return;
     }
     $('#msg').val('');
+    var content = process(msg, cid);
     var data = {
         sender_id: my_id,
         recv_id: cid,
-        content: msg
+        content: content
     };
     $.ajax({
         url: '/logic/send_msg',

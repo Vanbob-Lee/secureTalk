@@ -19,7 +19,7 @@ class OpenCtrl extends Controller
     //
     public function __invoke(Request $req, $part=null)
     {
-        $prot = [];//['get_pri_key'];  // 其余某些函数，因为参数不对，本来就不能被调用
+        $prot = ['get_pri_key'];  // 其余某些函数，因为参数不对，本来就不能被调用
         if (in_array($part, $prot)) {
             throw new Exception("Can't Access Function: $part");
         }
@@ -45,21 +45,21 @@ class OpenCtrl extends Controller
 
     private function mod_exp($m, $key) {
         $n = $this->N;
-        $i = 1; $val = $m;
+        $i = 0; $val = 1;
         while ($i++ < $key) {
-            $val %= $n;
             $val *= $m;
+            $val %= $n;
         }
         return $val;
     }
 
-    private function get_pri_key($req) {
+    private function get_pri_key() {
         $user = Auth::user();
         if (!$user) {
             throw new Exception("Not Login");
         }
 
-        return Cache::remember('pri_'.$req->id, 0, function () use($user){
+        return Cache::remember('pri_'.$user->id, 0, function () use($user){
             $last = ord(substr($user->password, -1));
             $fi = ($this->p-1)*($this->q-1);
             $pub = $this->get_pub_inner($user->id);
@@ -85,12 +85,12 @@ class OpenCtrl extends Controller
     private function signature($req) {
         $pri_key = $this->get_pri_key();
         $hash = $req->hash;
-        $sign = '';
+        $sign_vals = [];
         for($i=0; $i<32; $i++) {
             $val = hexdec($hash[$i]);
             $sign_val = $this->mod_exp($val, $pri_key);
-            $sign .= chr($sign_val);
+            $sign_vals[] = $sign_val;
         }
-        return $sign;
+        return $sign_vals;
     }
 }

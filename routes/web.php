@@ -16,16 +16,15 @@ Route::get('/', function () {
     return redirect('/login');
 });
 Route::get('/test', function() {
-    /*
-    $n = 187; $m=11; $key = 23;
+    $n = 6887; $m=7; $key = 3721;
     $val = 1; $i = 0;
     while ($i++ < $key) {
         $val *= $m;
         $val %= $n;
     }
     return $val;
-    */
-    \Illuminate\Support\Facades\Cache::flush();
+
+    // \Illuminate\Support\Facades\Cache::flush();
 });
 
 Route::get('/view/show_pic', 'ViewCtrl@show_pic');
