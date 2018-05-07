@@ -56,7 +56,7 @@ function send() {
 function recv() {
     var data = {
         sender_id: cid,
-        recv_id: my_id,
+        recv_id: my_id
     };
     $.ajax({
         url: '/logic/receive',
@@ -64,8 +64,8 @@ function recv() {
         data: data,
         success: function(ret) {
             for (var i=0;i<ret.length;i++) {
-                //console.log(ret[i]);
-                new_msg(ret[i].content, ret[i].created_at);
+                var plain = decrypt(ret[i].content, cid);
+                new_msg(plain, ret[i].created_at);
             }
         },
         error: function (err) {

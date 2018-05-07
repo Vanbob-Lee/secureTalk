@@ -92,7 +92,7 @@ mark;
                 });
             })
             ->orderBy('created_at')
-            ->paginate(10);
+            ->paginate(5);
         return compact('con', 'msg', 'me');
     }
 

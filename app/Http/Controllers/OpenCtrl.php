@@ -60,10 +60,8 @@ class OpenCtrl extends Controller
         }
 
         return Cache::remember('pri_'.$user->id, 0, function () use($user){
-            $last = ord(substr($user->password, -1));
-            $fi = ($this->p-1)*($this->q-1);
             $pub = $this->get_pub_inner($user->id);
-            return reverse($pub, $fi);
+            return reverse($pub, $this->fi);
         });
     }
 
@@ -92,5 +90,10 @@ class OpenCtrl extends Controller
             $sign_vals[] = $sign_val;
         }
         return $sign_vals;
+    }
+
+    private function get_ks($req) {
+        $pri_key = $this->get_pri_key();
+        return $this->mod_exp($req->env, $pri_key);
     }
 }

@@ -20,6 +20,7 @@ var sum_unread = 0;
 
 // 获取未读消息列表
 function unread() {
+    //console.log('get unread in index.js');
     $.ajax({
         url: '/logic/unread',
         type: 'post',
