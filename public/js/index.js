@@ -32,7 +32,7 @@ function unread() {
                 $('#tip').remove();
             } else {
                 if($('#tip').length === 0) {
-                    var tip = $('<div class="weui-loadmore weui-loadmore_line" id="tips"><span class="weui-loadmore__tips">暂无消息</span></div>');
+                    var tip = $('<div class="weui-loadmore weui-loadmore_line" id="tip"><span class="weui-loadmore__tips">暂无消息</span></div>');
                     $('#cells').append(tip);
                 }
                 return;
