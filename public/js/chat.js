@@ -76,9 +76,9 @@ function recv() {
 }
 
 $(document).ready(function () {
-    var h = $(document).height();
+    var h = window.screen.height;
     var fh = $('#footer').height();
-    $('#msg_div').css('height', h - fh);
+    $('#msg_div').css('height', 1.5*h - fh);
 
     /* 悬浮按钮
     var float_div = $('.float_div');

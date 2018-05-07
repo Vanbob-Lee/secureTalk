@@ -52,7 +52,7 @@
             var h = window.screen.height;
             // $(window).height() 非常大
             var fh = $('#footer').height();
-            $('#msg_div').css('height', 2*h - fh);
+            $('#msg_div').css('height', 1.5*h - fh);
         });
 
         function do_decrypt() {
