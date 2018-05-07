@@ -49,11 +49,10 @@
     <script>
         var uid = '{{ $con->id }}';
         $(document).ready(function () {
-            $(document).ready(function () {
-                var h = $(document).height();
-                var fh = $('#footer').height();
-                $('#msg_div').css('height', h - fh);
-            });
+            var h = window.screen.height;
+            var fh = $('#footer').height();
+            alert('h='+h+','+'fh='+fh);
+            $('#msg_div').css('height', h - fh);
         });
 
         function do_decrypt() {
