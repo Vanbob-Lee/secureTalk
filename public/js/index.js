@@ -26,7 +26,7 @@ function unread() {
         type: 'post',
         data: { id: my_id },
         success: function (ret) {
-            $('#msg_list').remove();  // 删除旧列表
+            $('#list').remove();  // 删除旧列表
             $('#point').remove();
             if (ret.length) {
                 $('#tip').remove();
@@ -38,7 +38,7 @@ function unread() {
                 return;
             }
 
-            var list = $('<div class="weui-cell" id="msg_list">');
+            var list = $('<div id="list"></div>');
             for(var i=0;i<ret.length;i++) {
                 aLine(list, ret[i]);
             }
@@ -54,6 +54,7 @@ function unread() {
 }
 
 function aLine(list, line) {
+    var cell = $('<div class="weui-cell"></div>');
     var div_left = $('<div class="weui-cell__hd" style="position: relative;margin-right: 10px;"></div>');
     var head = $('<img src="/img/head.png" style="width: 50px;display: block"/>');
     if (line.head) {
@@ -73,13 +74,14 @@ function aLine(list, line) {
     name_p.text(line.name);
     name_a.append(name_p);
     var msg_p = $('<p style="font-size: 13px;color: #888888;"></p>');
-    msg_p.text(line.content);
+    var plain = decrypt(line.content, line.uid);  // 明文
+    msg_p.text(plain);
     msg_a.append(msg_p);
     div_right.append(name_a);
     div_right.append(msg_a);
-
-    list.append(div_left);
-    list.append(div_right);
+    cell.append(div_left);
+    cell.append(div_right);
+    list.append(cell);
 }
 
 setInterval(unread, 15000);

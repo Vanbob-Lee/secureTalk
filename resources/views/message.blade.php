@@ -12,15 +12,16 @@
             var msg_ele = all_msg[i];
             var uid_ele = $(msg_ele).next();
             var plain = decrypt(msg_ele.textContent, uid_ele.val());
-            msg_ele.text = plain;
+            msg_ele.textContent = plain;
         }
     });
 </script>
 
 <div class="weui-cells" style="margin-top: 0px;" id="cells">
     @if(count($messages))
-        <div class="weui-cell" id="msg_list">
+        <div id="list">
         @foreach($messages as $msg)
+        <div class="weui-cell">
             <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                 <img src="{{ $msg->head or '/img/head.png' }}" style="width: 50px;display: block"/>
                 <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">{{ $msg->unread_count }}</span>
@@ -30,6 +31,7 @@
                 <a href="/view/chat?cid={{ $msg->uid }}"><p style="font-size: 13px;color: #888888;" class="cipher_msg">{{ $msg->content }}
                     </p><input type="hidden" value="{{ $msg->uid }}"></a>
             </div>
+        </div>
         @endforeach
         </div>
 

@@ -40,7 +40,8 @@ from users, messages, (
   recv_id = ? and `read` = 0 group by sender_id
 ) sub_table
 where sub_table.sender_id = users.id and
-messages.created_at = sub_table.maxTime;
+messages.created_at = sub_table.maxTime
+order by sub_table.maxTime desc;
 mark;
         $messages = DB::select($sql, [$this->me->id]);
         return compact('contacts', 'messages');
