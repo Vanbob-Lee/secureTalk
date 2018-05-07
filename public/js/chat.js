@@ -3,7 +3,7 @@ function my_msg(str, time) {
     var div = $('<div align="right"></div>');
     var li_ele = $('<li class="list-group-item my_li"></li>');
     var name_ele = $('<p style="color: white"></p>');
-    name_ele.text(my_name + ' ' + time);
+    name_ele.html('<b>' + my_name + '</b>' + '\t' + time);
     var msg_ele = $('<span style="margin-right: 5px"></span>');
     msg_ele.text(str);
     li_ele.append(name_ele);
@@ -17,7 +17,7 @@ function new_msg(str, time) {
     var div = $('<div></div>');
     var li_ele = $('<li class="list-group-item con_li"></li>');
     var name_ele = $('<p style="color: #1b6d85"></p>');
-    name_ele.text(con_name + '\t' + time);
+    name_ele.html('<b>' + con_name + '</b>' + '\t' + time);
     var msg_ele = $('<span style="margin-right: 5px"></span>');
     msg_ele.text(str);
     li_ele.append(name_ele);
@@ -76,10 +76,9 @@ function recv() {
 }
 
 $(document).ready(function () {
-    var h = window.screen.height;
+    var h = $(document).height();
     var fh = $('#footer').height();
-    var msg_div = $('#msg_div');
-    msg_div.css('height', h - fh);
+    $('#msg_div').css('height', h - fh);
 
     /* 悬浮按钮
     var float_div = $('.float_div');

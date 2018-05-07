@@ -50,10 +50,9 @@
         var uid = '{{ $con->id }}';
         $(document).ready(function () {
             $(document).ready(function () {
-                var h = window.screen.height;
+                var h = $(document).height();
                 var fh = $('#footer').height();
-                var msg_div = $('#msg_div');
-                msg_div.css('height', h - fh);
+                $('#msg_div').css('height', h - fh);
             });
         });
 
