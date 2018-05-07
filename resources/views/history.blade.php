@@ -50,9 +50,9 @@
         var uid = '{{ $con->id }}';
         $(document).ready(function () {
             var h = window.screen.height;
+            // $(window).height() 非常大
             var fh = $('#footer').height();
-            alert('h='+h+','+'fh='+fh);
-            $('#msg_div').css('height', h - fh);
+            $('#msg_div').css('height', 2*h - fh);
         });
 
         function do_decrypt() {
