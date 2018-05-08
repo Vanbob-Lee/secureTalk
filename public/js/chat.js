@@ -3,7 +3,7 @@ function my_msg(str, time) {
     var div = $('<div align="right"></div>');
     var li_ele = $('<li class="list-group-item my_li"></li>');
     var name_ele = $('<p style="color: white"></p>');
-    name_ele.html('<b>' + my_name + '</b>' + '\t' + time);
+    name_ele.html('<b>' + my_name + '</b>' + '&nbsp;&nbsp;&nbsp;' + time);
     var msg_ele = $('<span style="margin-right: 5px"></span>');
     msg_ele.text(str);
     li_ele.append(name_ele);
@@ -17,7 +17,7 @@ function new_msg(str, time) {
     var div = $('<div></div>');
     var li_ele = $('<li class="list-group-item con_li"></li>');
     var name_ele = $('<p style="color: #1b6d85"></p>');
-    name_ele.html('<b>' + con_name + '</b>' + '\t' + time);
+    name_ele.html('<b>' + con_name + '</b>' + '&nbsp;&nbsp;&nbsp;' + time);
     var msg_ele = $('<span style="margin-right: 5px"></span>');
     msg_ele.text(str);
     li_ele.append(name_ele);
@@ -76,9 +76,17 @@ function recv() {
 }
 
 $(document).ready(function () {
+    // 分配高度
     var h = window.screen.height;
     var fh = $('#footer').height();
     $('#msg_div').css('height', 1.5*h - fh);
+
+    // 解密第一批未读消息
+    var cips = $('.cipher');
+    for (var i=0; i<cips.length; i++) {
+        var plain = decrypt(cips[i].value, cid);
+        $(cips[i]).next().text(plain);
+    }
 
     /* 悬浮按钮
     var float_div = $('.float_div');
@@ -91,5 +99,6 @@ $(document).ready(function () {
         if (d < 10) float_div.css('display', 'none');
     });
     */
+
     setInterval(recv, 5000);
 });

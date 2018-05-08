@@ -71,14 +71,14 @@
                 @if ($m->sender_id == $con->id)
                     <div>
                         <li class="list-group-item con_li">
-                            <p style="color: #1b6d85">{{ $con->name }}&emsp;{{ $m->created_at }}</p>
+                            <p style="color: #1b6d85">{{ $con->name }}&nbsp;&nbsp;&nbsp;{{ $m->created_at }}</p>
                             <span style="margin-left: 5px">{{ $m->content }}</span>
                         </li>
                     </div>
                 @else
                     <div align="right">
                         <li class="list-group-item my_li">
-                            <p style="color: white">{{ $me->name }}&emsp;{{ $m->created_at }}</p>
+                            <p style="color: white">{{ $me->name }}&nbsp;&nbsp;&nbsp;{{ $m->created_at }}</p>
                             <span style="margin-right: 5px">{{ $m->content }}</span>
                         </li>
                     </div>

@@ -35,8 +35,9 @@
             @foreach($msg as $m)
                 <div>
                 <li class="list-group-item con_li">
-                    <p style="color: #1b6d85">{{ $con->name }}&emsp;{{ $m->created_at }}</p>
-                    <span style="margin-left: 5px">{{ $m->content }}</span>
+                    <p style="color: #1b6d85"><b>{{ $con->name }}</b>&nbsp;&nbsp;&nbsp;{{ $m->created_at }}</p>
+                    <input type="hidden" value="{{ $m->content }}" class="cipher">
+                    <span style="margin-left: 5px"></span>
                 </li>
                 </div>
         @endforeach

@@ -120,7 +120,7 @@ trait HasTimestamps
      */
     public function getUpdatedAtColumn()
     {
-        //return static::UPDATED_AT;
-        return null;
+        return static::UPDATED_AT;
+        //return null;  会导致所有模型的updated_at失效
     }
 }

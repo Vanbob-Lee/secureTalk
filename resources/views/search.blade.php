@@ -71,10 +71,10 @@
         </div>
         <label class="weui-search-bar__label" id="searchText">
             <i class="weui-icon-search"></i>
-            <span>搜索</span>
+            <span>请输入用户名或邮箱</span>
         </label>
     </form>
-    <button onclick="search();" class="weui-btn weui-btn_mini weui-btn_primary">搜索</button>
+    <button onclick="search();" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-left: 3px">搜索</button>
 </div>
 
 

@@ -28,6 +28,7 @@
             </div>
             <div class="weui-cell__bd">
                 <a href="/view/chat?cid={{ $msg->uid }}"><p style="color: black">{{ $msg->name }}</p></a>
+                <!-- 此处，把密文加载出来后再显示。chat.blade中，先解密再显示-->
                 <a href="/view/chat?cid={{ $msg->uid }}"><p style="font-size: 13px;color: #888888;" class="cipher_msg">{{ $msg->content }}
                     </p><input type="hidden" value="{{ $msg->uid }}"></a>
             </div>
