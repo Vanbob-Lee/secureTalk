@@ -79,7 +79,7 @@ $(document).ready(function () {
     // 分配高度
     var h = window.screen.height;
     var fh = $('#footer').height();
-    $('#msg_div').css('height', 3*h - fh);
+    $('#msg_div').css('height', 3.5*h - fh);
 
     // 解密第一批未读消息
     var cips = $('.cipher');
