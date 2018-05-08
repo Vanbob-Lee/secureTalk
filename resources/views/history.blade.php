@@ -94,7 +94,7 @@
 
 <div class="footer" id="footer">
     <div class="col-xs-10" style="margin-top: 5px"><b>密文：</b><input  id="cipher"></div>
-    <div class="col-xs-2"><button class="btn-success btn" style="margin-left: -25px" onclick="do_decrypt()">解密</button></div>
+    <div class="col-xs-2"><button class="btn-info btn" style="margin-left: -25px" onclick="do_decrypt()">解密</button></div>
     <div style="margin-left: 15px">
         <b>明文：</b><span id="plain">void</span>
     </div>
