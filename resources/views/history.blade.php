@@ -6,12 +6,12 @@
     <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/core.js"></script>
-    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/cipher-core.js"></script>
-    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/tripledes.js"></script>
-    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/mode-ecb.js"></script>
-    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/hmac-md5.js"></script>
-    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/md5.js"></script>
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/core.min.js"></script>
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/cipher-core.min.js"></script>
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/tripledes.min.js"></script>
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/mode-ecb.min.js"></script>
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/hmac-md5.min.js"></script>
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/md5.min.js"></script>
     <script src="/js/encrypt.js"></script>
 
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">

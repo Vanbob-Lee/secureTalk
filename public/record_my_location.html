@@ -1,26 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf8">
+    <meta charset="utf8">
+    <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
 </head>
 <body>
 <p id="demo">点击这个按钮，获得您的坐标：</p>
 <button onclick="getLocation()">试一下</button>
 <script>
 var x=document.getElementById("demo");
-function getLocation()
-  {
-  if (navigator.geolocation)
-    {
-    navigator.geolocation.getCurrentPosition(record);
+
+function getLocation() {
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(record, err, {
+        enableHighAccuracy: true,
+        maximumAge: 0
+    });
+}
+else {
+    x.innerHTML="Geolocation is not supported by this browser.";}
+}
+
+function record(position) {
+    x.innerHTML="Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;
+}
+
+function err(error) {
+    switch(error.code) {
+        case error.TIMEOUT:
+            showError("A timeout occured! Please try again!");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            showError('We can\'t detect your location. Sorry!');
+            break;
+        case error.PERMISSION_DENIED:
+            showError('Please allow geolocation access for this to work.');
+            break;
+        case error.UNKNOWN_ERROR:
+            showError('An unknown error occured!');
+            break;
     }
-  else{x.innerHTML="Geolocation is not supported by this browser.";}
-  }
-function record(position)
-  {
-  x.innerHTML="Latitude: " + position.coords.latitude + 
-  "<br />Longitude: " + position.coords.longitude;	
-  }
+}
 </script>
 </body>
 </html>
