@@ -65,7 +65,8 @@ function get_pos() {
 
 var loc_msg;
 function get_address(ret) {
-    loc_msg = ret.result.format_address;
+    loc_msg += '，地址：' + ret.result.formatted_address;
+    send_inner(loc_msg);
 }
 // 发送位置
 function send_pos(pos) {
@@ -74,7 +75,6 @@ function send_pos(pos) {
     loc_msg += '纬度：' + lat + '，经度：' + lng;
     var url = 'http://api.map.baidu.com/geocoder/v2/?location='+ lat + ',' + lng + '&output=json&ak=qp6D3Bw3qFieyg5NiA4IuxYQlbi7Ge2s&callback=get_address';
     $.getScript(url);
-    send_inner(loc_msg);
 }
 
 function send_inner(msg) {
