@@ -63,11 +63,18 @@ function get_pos() {
     }
 }
 
+var loc_msg;
+function get_address(ret) {
+    loc_msg = ret.result.format_address;
+}
 // 发送位置
 function send_pos(pos) {
-    var msg = '[定位信息]';
-    msg += '纬度：' + pos.coords.latitude + '，经度：' + pos.coords.longitude;
-    send_inner(msg);
+    loc_msg = '[定位信息] ';
+    var lat = pos.coords.latitude, lng = pos.coords.longitude;
+    loc_msg += '纬度：' + lat + '，经度：' + lng;
+    var url = 'http://api.map.baidu.com/geocoder/v2/?location='+ lat + ',' + lng + '&output=json&ak=qp6D3Bw3qFieyg5NiA4IuxYQlbi7Ge2s&callback=get_address';
+    $.getScript(url);
+    send_inner(loc_msg);
 }
 
 function send_inner(msg) {

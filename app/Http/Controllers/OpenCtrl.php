@@ -97,7 +97,7 @@ class OpenCtrl extends Controller
         return $this->mod_exp($req->env, $pri_key);
     }
 
-    private function write_my_location($req) {
+    private function record_my_location($req) {
 
     }
 }
