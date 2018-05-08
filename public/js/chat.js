@@ -31,28 +31,28 @@ function send() {
     send_inner(msg);
 }
 
-function showError(error)
-{
+function showError(error) {
     var err_msg;
     switch(error.code)
     {
         case error.PERMISSION_DENIED:
-            err_msg = "User denied the request for Geolocation."
+            err_msg = "User denied the request for Geolocation.";
             break;
         case error.POSITION_UNAVAILABLE:
-            err_msg = "Location information is unavailable."
+            err_msg = "Location information is unavailable.";
             break;
         case error.TIMEOUT:
-            err_msg = "The request to get user location timed out."
+            err_msg = "The request to get user location timed out.";
             break;
         case error.UNKNOWN_ERROR:
-            err_msg = "An unknown error occurred."
+            err_msg = "An unknown error occurred.";
             break;
     }
     alert(err_msg);
 }
 
 function get_pos() {
+    if (!confirm('确认要将您的当前位置发送给好友吗？')) return;
     var geo_obj = navigator.geolocation;
     if (geo_obj) {
         geo_obj.getCurrentPosition(send_pos, showError, {
