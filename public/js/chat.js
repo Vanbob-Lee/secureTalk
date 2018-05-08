@@ -1,4 +1,4 @@
-function my_msg(str, time) {
+﻿function my_msg(str, time) {
     var list_ele = $('#list');
     var div = $('<div align="right"></div>');
     var li_ele = $('<li class="list-group-item my_li"></li>');
@@ -79,7 +79,7 @@ $(document).ready(function () {
     // 分配高度
     var h = window.screen.height;
     var fh = $('#footer').height();
-    $('#msg_div').css('height', 2*h - fh);
+    $('#msg_div').css('height', 3*h - fh);
 
     // 解密第一批未读消息
     var cips = $('.cipher');
