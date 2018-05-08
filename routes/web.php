@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     //return view('welcome');
-    return redirect('/login');
+    return redirect('/view/index');
 });
 Route::get('/test', function() {
     $n = 6887; $m=7; $key = 3721;

@@ -6,15 +6,7 @@
     <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/chat.js"></script>
-
-    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/core.min.js"></script>
-    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/cipher-core.min.js"></script>
-    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/tripledes.min.js"></script>
-    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/mode-ecb.min.js"></script>
-    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/hmac-md5.min.js"></script>
-    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/md5.min.js"></script>
-    <script src="/js/encrypt.js"></script>
-
+    @include('encrypt_js')
     <script>
         var my_id = '{{ $me->id }}';
         var my_name = '{{ $me->name }}';
