@@ -69,7 +69,13 @@ function process(message, con_id) {
 }
 
 function decrypt(packet_str, uid) {
-    var packet = eval('(' + packet_str + ')');
+    try {
+        var packet = eval('(' + packet_str + ')');
+    } catch (err) {
+        // eval()解析失败，说明原本就是明文（可能是由于发送方的浏览器不支持加密）
+        // 直接返回即可
+        return packet_str;
+    }
     var ks, kua, n;
     $.ajax({
         url: '/open/get_ks',
