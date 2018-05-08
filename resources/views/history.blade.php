@@ -93,9 +93,11 @@
     </div>
     <div align="center">
         {{ $msg->appends(['cid' => $con->id])->links() }}<br>
+        <!--
         <a href="/view/history?cid={{ $con->id }}&page=1" class="weui-footer__link">第一页&nbsp;</a>
         <a href="/view/chat?cid={{ $con->id }}" class="weui-footer__link">返回&nbsp;</a>
         <a href="/view/history?cid={{ $con->id }}&page={{ $msg->lastPage() }}" class="weui-footer__link">末页</a>
+        -->
     </div>
 </div>
 </body>

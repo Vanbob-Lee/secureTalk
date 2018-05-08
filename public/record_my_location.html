@@ -12,7 +12,7 @@ var x=document.getElementById("demo");
 
 function getLocation() {
 if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(record, err, {
+    navigator.geolocation.getCurrentPosition(record, showError, {
         enableHighAccuracy: true,
         maximumAge: 0
     });
@@ -26,19 +26,21 @@ function record(position) {
     "<br>Longitude: " + position.coords.longitude;
 }
 
-function err(error) {
-    switch(error.code) {
-        case error.TIMEOUT:
-            showError("A timeout occured! Please try again!");
+function showError(error)
+{
+    switch(error.code)
+    {
+        case error.PERMISSION_DENIED:
+            x.innerHTML="User denied the request for Geolocation."
             break;
         case error.POSITION_UNAVAILABLE:
-            showError('We can\'t detect your location. Sorry!');
+            x.innerHTML="Location information is unavailable."
             break;
-        case error.PERMISSION_DENIED:
-            showError('Please allow geolocation access for this to work.');
+        case error.TIMEOUT:
+            x.innerHTML="The request to get user location timed out."
             break;
         case error.UNKNOWN_ERROR:
-            showError('An unknown error occured!');
+            x.innerHTML="An unknown error occurred."
             break;
     }
 }

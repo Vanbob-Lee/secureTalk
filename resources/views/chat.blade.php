@@ -6,7 +6,15 @@
     <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/chat.js"></script>
-    @include('encrypt_js')
+
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/core.min.js"></script>
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/cipher-core.min.js"></script>
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/tripledes.min.js"></script>
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/mode-ecb.min.js"></script>
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/hmac-md5.min.js"></script>
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9/md5.min.js"></script>
+    <script src="/js/encrypt.js"></script>
+
     <script>
         var my_id = '{{ $me->id }}';
         var my_name = '{{ $me->name }}';
@@ -40,7 +48,7 @@
 <div class="footer" id="footer">
     <textarea class="form-control" id="msg" style="overflow: hidden;"></textarea>
     <div class="btn_div">
-        <a href="/view/index" class="btn_serial"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a href="javascript:get_pos()" class="btn_serial"><span class="glyphicon glyphicon-chevron-left"></span></a>
         <a href="/view/history?cid={{ $con->id }}" class="btn_serial"><span class="glyphicon glyphicon-time"></span></a>
         <a href="/view/info?id={{ $con->id }}" class="btn_serial"><span class="glyphicon glyphicon-user"></span></a>
         <a href="/view/hide?cid={{ $con->id }}" class="btn_serial"><span class="glyphicon glyphicon-picture"></span></a>

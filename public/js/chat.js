@@ -28,6 +28,49 @@ function new_msg(str, time) {
 
 function send() {
     var msg = $('#msg').val();
+    send_inner(msg);
+}
+
+function showError(error)
+{
+    var err_msg;
+    switch(error.code)
+    {
+        case error.PERMISSION_DENIED:
+            err_msg = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            err_msg = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            err_msg = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            err_msg = "An unknown error occurred."
+            break;
+    }
+    alert(err_msg);
+}
+
+function get_pos() {
+    var geo_obj = navigator.geolocation;
+    if (geo_obj) {
+        geo_obj.getCurrentPosition(send_pos, showError, {
+            enableHighAccuracy: true, maximumAge: 0
+        });
+    } else {
+        alert('浏览器不支持定位');
+    }
+}
+
+// 发送位置
+function send_pos(pos) {
+    var msg = '[定位信息]';
+    msg += '纬度：' + pos.coords.latitude + '，经度：' + pos.coords.longitude;
+    send_inner(msg);
+}
+
+function send_inner(msg) {
     if (msg == '') {
         alert('不能发送空消息');
         return;
