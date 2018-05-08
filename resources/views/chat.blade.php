@@ -48,7 +48,7 @@
 <div class="footer" id="footer">
     <textarea class="form-control" id="msg" style="overflow: hidden;"></textarea>
     <div class="btn_div">
-        <a href="javascript:get_pos()" class="btn_serial"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a href="javascript:get_pos()" class="btn_serial"><span class="glyphicon glyphicon glyphicon-map-marker"></span></a>
         <a href="/view/history?cid={{ $con->id }}" class="btn_serial"><span class="glyphicon glyphicon-time"></span></a>
         <a href="/view/info?id={{ $con->id }}" class="btn_serial"><span class="glyphicon glyphicon-user"></span></a>
         <a href="/view/hide?cid={{ $con->id }}" class="btn_serial"><span class="glyphicon glyphicon-picture"></span></a>
