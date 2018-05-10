@@ -73,7 +73,7 @@ function send_pos(pos) {
     loc_msg = '[定位信息] ';
     var lat = pos.coords.latitude, lng = pos.coords.longitude;
     loc_msg += '纬度：' + lat + '，经度：' + lng;
-    var url = 'http://api.map.baidu.com/geocoder/v2/?location='+ lat + ',' + lng + '&output=json&ak=qp6D3Bw3qFieyg5NiA4IuxYQlbi7Ge2s&callback=get_address';
+    var url = 'http://api.map.baidu.com/geocoder/v2/?location='+ lat + ',' + lng + '&output=json&ak=qp6D3Bw3qFieyg5NiA4IuxYQlbi7Ge2s&coordtype=wgs84ll&callback=get_address';
     $.getScript(url);
 }
 
