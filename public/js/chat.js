@@ -65,7 +65,8 @@ function get_pos() {
 
 var loc_msg;
 function get_address(ret) {
-    loc_msg += '，地址：' + ret.result.formatted_address + '描述：' + ret.sematic_description;
+    var rs = ret.result;
+    loc_msg += '，地址：' + rs.formatted_address + '，描述：' + rs.sematic_description;
     send_inner(loc_msg);
 }
 // 发送位置
