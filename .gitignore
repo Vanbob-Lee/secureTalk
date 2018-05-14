@@ -4,7 +4,7 @@
 /storage/*.key
 /vendor
 /.vagrant
-
+/app/Tools/db_info.json
 Homestead.json
 Homestead.yaml
 npm-debug.log
