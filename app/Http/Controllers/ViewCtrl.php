@@ -113,4 +113,10 @@ mark;
         return response($content, 200)
             ->header('content-type', 'image/png');
     }
+
+    private function pk($req) {
+        $me = $this->me;
+        $fri = User::find($req->id);
+        return compact('me', 'fri');
+    }
 }

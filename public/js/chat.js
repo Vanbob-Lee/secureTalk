@@ -29,6 +29,7 @@ function new_msg(str, time) {
 function send() {
     var msg = $('#msg').val();
     send_inner(msg);
+    $('#msg').val('');
 }
 
 function showError(error) {
@@ -83,7 +84,6 @@ function send_inner(msg) {
         alert('不能发送空消息');
         return;
     }
-    $('#msg').val('');
     var content = process(msg, cid);
     var data = {
         sender_id: my_id,
@@ -95,7 +95,7 @@ function send_inner(msg) {
         type: 'post',
         data: data,
         success: function(ret) {
-            my_msg(msg, ret);
+            my_msg(msg, ret);  // ret: 时间戳
         },
         error: function (err) {
             alert('消息发送失败');
