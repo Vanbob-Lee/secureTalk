@@ -12,6 +12,11 @@
         var fri_name = '{{ $fri->name }}', my_name = '{{ $me->name }}';
         var fid = '{{ $fri->id }}', my_id = '{{ $me->id }}';
     </script>
+    <style>
+        .my_btn {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 <div class="col-xs-4">
@@ -23,10 +28,28 @@
 </div>
 <div class="col-xs-4"><img src="{{ $fri->head }}" width="50px" height="50px"><p>{{ $fri->name }}</p></div>
 
-<div id="main">
-
+<div id="main" style="text-align: center">
+    <div class="col-xs-2"><p>@{{ my_points }}</p></div>
+    <div class="col-xs-8">
+        <div v-if="q">
+            <p id="q_type">@{{ q.type }}</p>
+            <div><h3>@{{ q.title }}</h3></div>
+            {{--
+            <input type="radio" value="A" class="radio">A&nbsp;<label>@{{ q.A }}</label>
+            <p><input type="radio" value="B" class="radio">B&nbsp;<label>@{{ q.B }}</label></p>
+            <p><input type="radio" value="C" class="radio">C&nbsp;<label>@{{ q.C }}</label></p>
+            <p><input type="radio" value="D" class="radio">D&nbsp;<label>@{{ q.D }}</label></p>
+            --}}
+            <button value="A" class="btn my_btn">@{{ q.A }}</button><br>
+            <button value="B" class="btn my_btn">@{{ q.B }}</button><br>
+            <button value="C" class="btn my_btn">@{{ q.C }}</button><br>
+            <button value="D" class="btn my_btn">@{{ q.D }}</button><br>
+        </div>
+    </div>
+    <div class="col-xs-2"><p>@{{ fri_points }}</p></div>
 </div>
-<script src="/js/pk.js"></script> <!--可能使用vue-->
+
+<script src="/js/pk.js"></script>
 </body>
 
 </html>

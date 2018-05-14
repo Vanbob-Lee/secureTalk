@@ -1,7 +1,22 @@
 var interv_id;
 var ws;
-var points = 0;  // 我的分数
 var status_ele = $('#status');
+
+var vue = new Vue({
+    el: '#main',
+    data: {
+        /*
+        q: {
+            title: '暂未加载题目',
+            A: '你好', B: '', C: '', D: ''
+        },
+        vue.q = {title: 'T', A:'A', B: 'B', C: 'C', D: 'D'}
+        */
+        q: null,
+        my_points: 0,  // 我的分数
+        fri_points: 0
+    }
+});
 
 function send_inner(msg) {
     var data = {
@@ -50,8 +65,12 @@ $(document).ready(function () {
             } break;
 
             case 1:{
-                status_ele.text('双方就绪');
+                status_ele.text('正在对战');
             } break;
+
+            case 2:{
+                vue.q = data.q;
+            }
         }
     }
 });
