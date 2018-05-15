@@ -119,6 +119,7 @@ function q_end() {
     setTimeout(function () {
         btns.removeClass('btn-success');
         btns.removeClass('btn-danger');
+        btns.removeClass('active');
         ws_send(1);  // 加载题目
         i_chs = fri_chs = 0;  // 还原为未答状态
         btns.removeAttr('disabled');
