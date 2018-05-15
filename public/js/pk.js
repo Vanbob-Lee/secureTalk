@@ -60,7 +60,7 @@ function terminate(msg) {
 }
 
 $(document).ready(function () {
-    var host = window.location.host;
+    var host = window.location.hostname;  // host有端口号 hostname没有
     ws = new WebSocket('ws://'+ host +':8686');
     ws.onopen = function() {
         ws_send(0);  // 尝试加入（如无法加入则自己创建）
