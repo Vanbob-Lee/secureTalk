@@ -94,7 +94,7 @@ $(document).ready(function () {
             } break;
 
             case -2:{
-                terminate('对方离开，比赛结束')
+                terminate('对方离开 比赛结束')
             } break;
         }
     }
@@ -122,7 +122,7 @@ function q_end() {
         ws_send(1);  // 加载题目
         i_chs = fri_chs = 0;  // 还原为未答状态
         btns.removeAttr('disabled');
-        btns.removeClass('active');
+        btns.removeClass('focus');
     }, 2000);  // 让用户看到结果
 }
 
