@@ -20,26 +20,26 @@
     </style>
 </head>
 <body>
-<div class="col-xs-4">
-    <img src="{{ $me->head }}" width="50px" height="50px"><p>{{ $me->name }}</p>
-</div>
-<div class="col-xs-4">
-    <p id="timer">10</p>
-    <span id="status">初始化</span>
-</div>
-<div class="col-xs-4"><img src="{{ $fri->head }}" width="50px" height="50px"><p>{{ $fri->name }}</p></div>
+<div id="app" style="text-align: center">
+    <div class="col-xs-4">
+        <img src="{{ $me->head }}" width="50px" height="50px"><p>{{ $me->name }}</p>
+    </div>
+    <div class="col-xs-4">
+        <p id="timer">@{{ timer }}</p>
+        <span id="status">初始化</span>
+    </div>
+    <div class="col-xs-4"><img src="{{ $fri->head }}" width="50px" height="50px"><p>{{ $fri->name }}</p></div>
 
-<div id="main" style="text-align: center">
     <div class="col-xs-2"><p>@{{ my_points }}</p></div>
     <div class="col-xs-8">
         <div v-if="q">
             <p id="q_type">@{{ q.type }}</p>
             <div><h4>@{{ q.title }}</h4></div>
 
-            <button value="A" class="btn my_btn">@{{ q.A }}</button><br>
-            <button value="B" class="btn my_btn">@{{ q.B }}</button><br>
-            <button value="C" class="btn my_btn">@{{ q.C }}</button><br>
-            <button value="D" class="btn my_btn">@{{ q.D }}</button><br>
+            <button class="btn my_btn" onclick="chk_ans(this)" value="A">@{{ q.A }}</button><br>
+            <button class="btn my_btn" onclick="chk_ans(this)" value="B">@{{ q.B }}</button><br>
+            <button class="btn my_btn" onclick="chk_ans(this)" value="C">@{{ q.C }}</button><br>
+            <button class="btn my_btn" onclick="chk_ans(this)" value="D">@{{ q.D }}</button><br>
         </div>
     </div>
     <div class="col-xs-2"><p>@{{ fri_points }}</p></div>

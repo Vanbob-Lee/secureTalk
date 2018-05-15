@@ -5,10 +5,10 @@ require_once './Workerman/Autoloader.php';
 $str = file_get_contents('db_info.json');
 $info = json_decode($str, 1);
 extract($info);
-$con = new mysqli($host, $username, $psw, $dbname);
+$db_con = new mysqli($host, $username, $psw, $dbname);
 $sql = 'select max(id) max_id from questions';
 // 打开worker后数据库新增的题目不会被抽到
-$max_id = $con->query($sql)->fetch_assoc()['max_id'];
+$max_id = $db_con->query($sql)->fetch_assoc()['max_id'];
 
 $worker = new Worker('websocket://0.0.0.0:8686');
 $pk_list = [];  // element = 'req_con_id'=>['req_id', 'acc_id', 'acc_con_id', 'status', 'qids']
@@ -19,40 +19,61 @@ $worker->onMessage = function($con, $str) {
 };
 
 $worker->onClose = function($con) {
-    global $pk, $worker;
+    global $pk_list, $worker;
     $ret = ['code' => -1];  // 比赛结束信号
     $str = json_encode($ret);
 
-    if ($pk[$con->id]) {  // 发起方断开
-        $acc_con = $pk[$con->id]['acc_con_id'];
+    if (isset($pk_list[$con->id])) {  // 发起方断开
+        if (isset($pk_list[$con->id]['acc_con_id']))
+            $acc_con_id = $pk_list[$con->id]['acc_con_id'];
+        else
+            return;
+        $acc_con = $worker->connections[$acc_con_id];
         $acc_con->send($str);  // 通知接受方
-        unset($pk[$con->id]);
+        unset($pk_list[$con->id]);
 
-    } else {
-        $con_id = find_con($con->id);
-        $worker->connections[$con_id]->send($str);
-        unset($pk[$con_id]);
     }
+    /* 接收者断开是无关紧要的，发起者还可以自娱自乐
+    else {
+        $con_id = find($con->id);
+        if (!$con_id) return;  // 接受方断开前，发起方已断开
+        $worker->connections[$con_id]->send($str);
+        //unset($pk_list[$con_id]);  接收方无权销毁对局
+    }
+    */
 };
 
+function closing($req_con, $acc_con) {
+    $ret = ['code' => -1];  // 比赛结束信号
+    $str = json_encode($ret);
+
+    $req_con->send($str);
+    $acc_con->send($str);
+}
+
 // 寻找 自己作为被邀请者的对局
-function find_con($uid) {
+function find_con($uid, $fid) {
     global $pk_list;
     foreach ($pk_list as $req_con_id => $pk) {
-        if ($pk['acc_id'] == $uid)
+        if ($pk['acc_id'] == $uid && $pk['req_id'] == $fid)
             return $req_con_id;
     }
-    return 0;
+    return null;
+}
+
+function find($acc_con_id) {
+    global $pk_list;
+    foreach ($pk_list as $req_con_id => $pk) {
+        if ($pk['acc_con_id'] == $acc_con_id)
+            return $req_con_id;
+    }
+    return null;
 }
 
 // 接受好友的挑战
 function accept($con, $con_id) {
     global $pk_list;
     $pk_list[$con_id]['acc_con_id'] = $con->id;
-    /*
-    $pk_list[$con_id]['status'] = 1;
-    echo $pk_list[$con_id]['status'];
-    */
     $ret = [ 'code' => 1 ];
     $ret = json_encode($ret);
     global $worker;
@@ -67,28 +88,34 @@ function req_pk($con, $data) {
     $pk_list[$con->id] = [
         'req_id' => $data->my_id,
         'acc_id' => $data->fri_id,
-        //'status' => 0
         'qids' => []
     ];
     $ret = json_encode([ 'code'=>0 ]);
     $con->send($ret);
 }
 
-// 发送题目都某一“对战”
+// 发送题目到某一“对战”
+// 参数$con_id必定是发起者，只有发起者能请求题目
 function send_q($con_id) {
-    global $worker, $pk_list, $con, $max_id;
+    global $worker, $pk_list, $db_con, $max_id;
+    $qids = $pk_list[$con_id]['qids'];
+
     $req_con = $worker->connections[$con_id];
     $acc_con_id = $pk_list[$con_id]['acc_con_id'];
     $acc_con =  $worker->connections[$acc_con_id];
+
+    if (count($qids) == 5) {  // 以达到指定题量，结束
+        closing($req_con, $acc_con);
+    }
 
     /*假设直接生成5个候选题id 似乎很高效。存在的问题：
     5个id中只要有一个无效（被删除的id），就要再重新生成候选 重新执行sql
     */
     $q = null;
-    while(!$q || in_array($q['id'], $pk_list[$con_id]['qids'])) {
+    while(!$q || in_array($q['id'], $qids)) {
         $sel_id = (int)rand(1, $max_id);
         $sql = "select * from questions where id = $sel_id";
-        $q = $con->query($sql)->fetch_assoc();
+        $q = $db_con->query($sql)->fetch_assoc();
     }
     $pk_list[$con_id]['qids'][] = $q['id'];  // 标记为已用题目
     $arr = ['code' => 2, 'q' => $q];  // code=2：分发题目
@@ -98,15 +125,31 @@ function send_q($con_id) {
 }
 
 function process($con, $data) {
+    global $pk_list, $worker;
     switch ($data->code) {
         case 0: {
-            $con_id = find_con($data->my_id);
             // 是否有人邀请自己
+            $con_id = find_con($data->my_id, $data->fri_id);
             if ($con_id) {
                 accept($con, $con_id);
             } else {
                 req_pk($con, $data);
             }
+        } break;
+
+        case 1: {
+            // 接受方无权请求题目，忽略
+            if (!isset($pk_list[$con->id])) return;
+            send_q($con->id);
+        } break;
+
+        case 2: {  // 接收分数并发给对方
+            if (isset($pk_list[$con->id])) {  // 自己是发起者
+                $con_id = $pk_list[$con->id]['acc_con_id'];
+            } else {
+                $con_id = find($con->id);
+            }
+            $worker->connections[$con_id]->send($data->points);
         } break;
     }
 }

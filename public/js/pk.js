@@ -1,23 +1,15 @@
 var interv_id;
 var ws;
-var has_bind = 0;  // 是否已绑定按钮点击事件
-var status_ele = $('#status');
 
 var vue = new Vue({
-    el: '#main',
+    el: '#app',
     data: {
-        /*
-        q: {
-            title: '暂未加载题目',
-            A: '你好', B: '', C: '', D: ''
-        },
-        vue.q = {title: 'T', A:'A', B: 'B', C: 'C', D: 'D'}
-        */
         q: null,
         my_points: 0,  // 我的分数
-        fri_points: 0
+        fri_points: 0,
+        timer: 10
     }
-});
+});  // 先让vue加载完元素
 
 function send_inner(msg) {
     var data = {
@@ -36,17 +28,30 @@ function send_inner(msg) {
     });
 }
 
-// 加载题目
-function load_q() {
+// 上传自己的新分数（worker推送给对方）
+function upload(point) {
     var data = {
-        code: 1,  // 尝试加入（如无法加入则自己创建）
+        code: 2,
+        my_id: my_id,
+        fri_id: fid,
+        point: point
+    };
+    ws.send(JSON.stringify(data));
+}
+
+function ws_send(code) {
+    var data = {
+        code: code,
         my_id: my_id,
         fri_id: fid
     };
+    ws.send(JSON.stringify(data));
 }
 
 $(document).ready(function () {
     ws = new WebSocket('ws://127.0.0.1:8686');
+
+    /*
     var data = {
         code: 0,  // 尝试加入（如无法加入则自己创建）
         my_id: my_id,
@@ -56,34 +61,53 @@ $(document).ready(function () {
         var str = JSON.stringify(data);
         ws.send(str);
     };
+    */
+
+
+    ws.onopen = function() {
+        ws_send(0);  // 尝试加入（如无法加入则自己创建）
+    };
+
+
     ws.onmessage = function (e) {
         var data = JSON.parse(e.data);
         switch (data.code) {
             case 0:{  // 成功建立对局
                 var tip = '[对战邀请] 好友向您发起了挑战，点击右下角按钮进入';
-                send_inner(tip);
-                status_ele.text('等待加入');
+                //send_inner(tip); 暂不发送！
+                $('#status').text('等待加入');
             } break;
 
             case 1:{
-                status_ele.text('正在对战');
+                $('#status').text('正在对战');
             } break;
 
-            case 2:{
+            case 2:{  // 接收题目
                 vue.q = data.q;
-                /* 无需动态绑定，直接在<btn>写onclick吧
-                if (!has_bind) {
-                    $('.my_btn').click(function () {
-                        send_pos(this.value);
-                    });
-                    has_bind = 1;
-                }
-                */
-            }
+                //tm_start();
+            } break;
         }
     }
 });
 
-function chk_ans(label) {
+function tm_start() {
+    vue.timer = 10;
+    interv_id = setInterval(function () {
+        vue.timer -= 1;
+        if (vue.timer === 0) {
+            clearInterval(interv_id);
+            $('.my_btn').removeClass('btn-success');
+            $('.my_btn').removeClass('btn-danger');
+            ws_send(1);  // 加载题目
+        }
+    }, 1000);
+}
 
+function chk_ans(ele) {
+    if (ele.value === vue.q.answer) {
+        vue.my_points += 20 * (10 - vue.timer);
+        $(ele).addClass('btn-success');
+    } else {
+        $(ele).addClass('btn-danger');
+    }
 }
