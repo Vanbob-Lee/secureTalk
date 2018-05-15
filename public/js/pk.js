@@ -69,7 +69,7 @@ $(document).ready(function () {
         switch (data.code) {
             case 0:{  // 成功建立对局
                 var tip = '[对战邀请] 好友向您发起了挑战，点击右下角按钮进入';
-                //send_inner(tip);
+                send_inner(tip);
                 $('#status').text('等待加入');
             } break;
 
