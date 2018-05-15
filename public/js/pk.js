@@ -1,5 +1,7 @@
 var interv_id;
 var ws;
+var i_chs, fri_chs;  // 自己或对方回答了当前题目
+ichs = fri_chs = 0;
 
 var vue = new Vue({
     el: '#app',
@@ -39,42 +41,35 @@ function upload(point) {
     ws.send(JSON.stringify(data));
 }
 
-function ws_send(code) {
+function ws_send(code, points) {
     var data = {
         code: code,
         my_id: my_id,
-        fri_id: fid
+        fri_id: fid,
+        points: points
     };
     ws.send(JSON.stringify(data));
 }
 
+function terminate(msg) {
+    clearInterval(interv_id);
+    vue.timer = 0;
+    $('.my_btn').attr('disabled', 'disabled');
+    $('#status').text(msg);
+    ws.close();
+}
+
 $(document).ready(function () {
     ws = new WebSocket('ws://127.0.0.1:8686');
-
-    /*
-    var data = {
-        code: 0,  // 尝试加入（如无法加入则自己创建）
-        my_id: my_id,
-        fri_id: fid
-    };
-    ws.onopen = function () {
-        var str = JSON.stringify(data);
-        ws.send(str);
-    };
-    */
-
-
     ws.onopen = function() {
         ws_send(0);  // 尝试加入（如无法加入则自己创建）
     };
-
-
     ws.onmessage = function (e) {
         var data = JSON.parse(e.data);
         switch (data.code) {
             case 0:{  // 成功建立对局
                 var tip = '[对战邀请] 好友向您发起了挑战，点击右下角按钮进入';
-                //send_inner(tip); 暂不发送！
+                //send_inner(tip);
                 $('#status').text('等待加入');
             } break;
 
@@ -84,7 +79,21 @@ $(document).ready(function () {
 
             case 2:{  // 接收题目
                 vue.q = data.q;
-                //tm_start();
+                tm_start();
+            } break;
+
+            case 3:{
+                fri_chs = 1;
+                vue.fri_points = data.points;
+                if (i_chs) q_end();
+            } break;
+
+            case -1:{
+                terminate('比赛结束');
+            } break;
+
+            case -2:{
+                terminate('对方离开，比赛结束')
             } break;
         }
     }
@@ -95,19 +104,36 @@ function tm_start() {
     interv_id = setInterval(function () {
         vue.timer -= 1;
         if (vue.timer === 0) {
-            clearInterval(interv_id);
-            $('.my_btn').removeClass('btn-success');
-            $('.my_btn').removeClass('btn-danger');
-            ws_send(1);  // 加载题目
+            q_end();
         }
     }, 1000);
 }
 
+// 计时结束 或 双方都回答了，加载下一题
+function q_end() {
+    clearInterval(interv_id);
+    var btns = $('.my_btn');
+    var ans = vue.q.answer;
+    $('.my_btn[value=' + ans +']').addClass('btn-success');  // 显示正确答案
+    setTimeout(function () {
+        btns.removeClass('btn-success');
+        btns.removeClass('btn-danger');
+        ws_send(1);  // 加载题目
+        i_chs = fri_chs = 0;  // 还原为未答状态
+        btns.removeAttr('disabled');
+    }, 2000);  // 让用户看到结果
+}
+
 function chk_ans(ele) {
+    i_chs = 1;
+    $('.my_btn').attr('disabled', 'disabled');
     if (ele.value === vue.q.answer) {
-        vue.my_points += 20 * (10 - vue.timer);
+        vue.my_points += 20 * vue.timer;
         $(ele).addClass('btn-success');
     } else {
         $(ele).addClass('btn-danger');
     }
+    // 只要进行了答题就一定会推送分数
+    ws_send(2, vue.my_points);
+    if (fri_chs) q_end();  // 自己回答时对方已回答
 }

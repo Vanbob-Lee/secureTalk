@@ -36,10 +36,10 @@
             <p id="q_type">@{{ q.type }}</p>
             <div><h4>@{{ q.title }}</h4></div>
 
-            <button class="btn my_btn" onclick="chk_ans(this)" value="A">@{{ q.A }}</button><br>
-            <button class="btn my_btn" onclick="chk_ans(this)" value="B">@{{ q.B }}</button><br>
-            <button class="btn my_btn" onclick="chk_ans(this)" value="C">@{{ q.C }}</button><br>
-            <button class="btn my_btn" onclick="chk_ans(this)" value="D">@{{ q.D }}</button><br>
+            <button class="btn btn-default my_btn" onclick="chk_ans(this)" value="A">@{{ q.A }}</button><br>
+            <button class="btn btn-default my_btn" onclick="chk_ans(this)" value="B">@{{ q.B }}</button><br>
+            <button class="btn btn-default my_btn" onclick="chk_ans(this)" value="C">@{{ q.C }}</button><br>
+            <button class="btn btn-default my_btn" onclick="chk_ans(this)" value="D">@{{ q.D }}</button><br>
         </div>
     </div>
     <div class="col-xs-2"><p>@{{ fri_points }}</p></div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>与 {{ $db_con->name }} 的聊天记录</title>
+    <title>与 {{ $con->name }} 的聊天记录</title>
     <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     @include('encrypt_js')
@@ -38,7 +38,7 @@
     </style>
 
     <script>
-        var uid = '{{ $db_con->id }}';
+        var uid = '{{ $con->id }}';
         $(document).ready(function () {
             var h = window.screen.height;
             // $(window).height() 非常大
@@ -59,10 +59,10 @@
     <ul class="list-group">
         @if($msg)
             @foreach($msg as $m)
-                @if ($m->sender_id == $db_con->id)
+                @if ($m->sender_id == $con->id)
                     <div>
                         <li class="list-group-item con_li">
-                            <p style="color: #1b6d85">{{ $db_con->name }}&nbsp;&nbsp;&nbsp;{{ $m->created_at }}</p>
+                            <p style="color: #1b6d85">{{ $con->name }}&nbsp;&nbsp;&nbsp;{{ $m->created_at }}</p>
                             <span style="margin-left: 5px">{{ $m->content }}</span>
                         </li>
                     </div>
@@ -90,8 +90,8 @@
         <b>明文：</b><span id="plain">void</span>
     </div>
     <div align="center">
-        {{ $msg->appends(['cid' => $db_con->id])->links() }}<br>
-        <a href="/view/chat?cid={{ $db_con->id }}" class="weui-footer__link">返回聊天</a>
+        {{ $msg->appends(['cid' => $con->id])->links() }}<br>
+        <a href="/view/chat?cid={{ $con->id }}" class="weui-footer__link">返回聊天</a>
         {{--
         <a href="/view/history?cid={{ $con->id }}&page=1" class="weui-footer__link">第一页&nbsp;</a>
         <a href="/view/history?cid={{ $con->id }}&page={{ $msg->lastPage() }}" class="weui-footer__link">末页</a>

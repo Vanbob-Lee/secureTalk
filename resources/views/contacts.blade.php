@@ -14,12 +14,12 @@
 @if(isset($contacts))
     <div class="weui-grids">
     @foreach($contacts as $con)
-        <a href="/view/chat?cid={{ $db_con->id }}" class="weui-grid">
+        <a href="/view/chat?cid={{ $con->id }}" class="weui-grid">
             <div class="weui-grid__icon">
-                <img src="{{ $db_con->head or '/img/head.png' }}">
+                <img src="{{ $con->head or '/img/head.png' }}">
             </div>
             <p class="weui-grid__label">
-                {{ $db_con->name }}
+                {{ $con->name }}
             </p>
         </a>
     @endforeach

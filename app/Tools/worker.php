@@ -11,45 +11,33 @@ $sql = 'select max(id) max_id from questions';
 $max_id = $db_con->query($sql)->fetch_assoc()['max_id'];
 
 $worker = new Worker('websocket://0.0.0.0:8686');
-$pk_list = [];  // element = 'req_con_id'=>['req_id', 'acc_id', 'acc_con_id', 'status', 'qids']
+$pk_list = [];  // element = 'req_con_id'=>['req_id', 'acc_id', 'acc_con_id', 'qids']
 $worker->onMessage = function($con, $str) {
     $data = json_decode($str);
-    //global $pk_list; var_dump($pk_list);
     process($con, $data);
 };
 
 $worker->onClose = function($con) {
     global $pk_list, $worker;
-    $ret = ['code' => -1];  // 比赛结束信号
+    $ret = ['code' => -2];  // 意外离开信号
     $str = json_encode($ret);
 
-    if (isset($pk_list[$con->id])) {  // 发起方断开
-        if (isset($pk_list[$con->id]['acc_con_id']))
-            $acc_con_id = $pk_list[$con->id]['acc_con_id'];
-        else
-            return;
-        $acc_con = $worker->connections[$acc_con_id];
-        $acc_con->send($str);  // 通知接受方
-        unset($pk_list[$con->id]);
+    if (isset($pk_list[$con->id])) {
+        $acc_con_id = $pk_list[$con->id]['acc_con_id'];
+        if (!isset($worker->connections[$acc_con_id])) {
+            unset($pk_list[$con->id]);
+        } else {
+            $acc_con = $worker->connections[$acc_con_id];
+            $acc_con->send($str);  // 通知接受方
+            unset($pk_list[$con->id]);
+        }
 
+    } else {
+        $req_con_id = find($con->id);
+        if (!$req_con_id) return;
+        $worker->connections[$req_con_id]->send($str);
     }
-    /* 接收者断开是无关紧要的，发起者还可以自娱自乐
-    else {
-        $con_id = find($con->id);
-        if (!$con_id) return;  // 接受方断开前，发起方已断开
-        $worker->connections[$con_id]->send($str);
-        //unset($pk_list[$con_id]);  接收方无权销毁对局
-    }
-    */
 };
-
-function closing($req_con, $acc_con) {
-    $ret = ['code' => -1];  // 比赛结束信号
-    $str = json_encode($ret);
-
-    $req_con->send($str);
-    $acc_con->send($str);
-}
 
 // 寻找 自己作为被邀请者的对局
 function find_con($uid, $fid) {
@@ -105,7 +93,11 @@ function send_q($con_id) {
     $acc_con =  $worker->connections[$acc_con_id];
 
     if (count($qids) == 5) {  // 以达到指定题量，结束
-        closing($req_con, $acc_con);
+        $ret = ['code' => -1];  // 比赛结束信号
+        $str = json_encode($ret);
+        $req_con->send($str);
+        $acc_con->send($str);
+        return;
     }
 
     /*假设直接生成5个候选题id 似乎很高效。存在的问题：
@@ -149,7 +141,8 @@ function process($con, $data) {
             } else {
                 $con_id = find($con->id);
             }
-            $worker->connections[$con_id]->send($data->points);
+            $ret = json_encode(['code' => 3, 'points' => $data->points]);
+            $worker->connections[$con_id]->send($ret);
         } break;
     }
 }
