@@ -18,6 +18,23 @@ $worker->onMessage = function($con, $str) {
     process($con, $data);
 };
 
+$worker->onClose = function($con) {
+    global $pk, $worker;
+    $ret = ['code' => -1];  // 比赛结束信号
+    $str = json_encode($ret);
+
+    if ($pk[$con->id]) {  // 发起方断开
+        $acc_con = $pk[$con->id]['acc_con_id'];
+        $acc_con->send($str);  // 通知接受方
+        unset($pk[$con->id]);
+
+    } else {
+        $con_id = find_con($con->id);
+        $worker->connections[$con_id]->send($str);
+        unset($pk[$con_id]);
+    }
+};
+
 // 寻找 自己作为被邀请者的对局
 function find_con($uid) {
     global $pk_list;

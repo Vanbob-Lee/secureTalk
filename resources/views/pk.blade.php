@@ -15,6 +15,7 @@
     <style>
         .my_btn {
             margin-top: 20px;
+            width: 100%;
         }
     </style>
 </head>
@@ -33,13 +34,8 @@
     <div class="col-xs-8">
         <div v-if="q">
             <p id="q_type">@{{ q.type }}</p>
-            <div><h3>@{{ q.title }}</h3></div>
-            {{--
-            <input type="radio" value="A" class="radio">A&nbsp;<label>@{{ q.A }}</label>
-            <p><input type="radio" value="B" class="radio">B&nbsp;<label>@{{ q.B }}</label></p>
-            <p><input type="radio" value="C" class="radio">C&nbsp;<label>@{{ q.C }}</label></p>
-            <p><input type="radio" value="D" class="radio">D&nbsp;<label>@{{ q.D }}</label></p>
-            --}}
+            <div><h4>@{{ q.title }}</h4></div>
+
             <button value="A" class="btn my_btn">@{{ q.A }}</button><br>
             <button value="B" class="btn my_btn">@{{ q.B }}</button><br>
             <button value="C" class="btn my_btn">@{{ q.C }}</button><br>

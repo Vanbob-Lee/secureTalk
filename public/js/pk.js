@@ -1,5 +1,6 @@
 var interv_id;
 var ws;
+var has_bind = 0;  // 是否已绑定按钮点击事件
 var status_ele = $('#status');
 
 var vue = new Vue({
@@ -70,7 +71,19 @@ $(document).ready(function () {
 
             case 2:{
                 vue.q = data.q;
+                /* 无需动态绑定，直接在<btn>写onclick吧
+                if (!has_bind) {
+                    $('.my_btn').click(function () {
+                        send_pos(this.value);
+                    });
+                    has_bind = 1;
+                }
+                */
             }
         }
     }
 });
+
+function chk_ans(label) {
+
+}
