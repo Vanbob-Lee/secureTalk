@@ -24,11 +24,11 @@ $worker->onClose = function($con) {
 
     if (isset($pk_list[$con->id])) {
         $acc_con_id = $pk_list[$con->id]['acc_con_id'];
-        if (!isset($worker->connections[$acc_con_id])) {
-            unset($pk_list[$con->id]);
-        } else {
+        if (isset($worker->connections[$acc_con_id])) {
             $acc_con = $worker->connections[$acc_con_id];
             $acc_con->send($str);  // 通知接受方
+            unset($pk_list[$con->id]);
+        } else {
             unset($pk_list[$con->id]);
         }
 
