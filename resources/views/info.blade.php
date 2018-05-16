@@ -42,7 +42,7 @@
     </div>
     <div class="weui-cell weui-cell_select">
         <div class="weui-cell__hd">
-            <select class="weui-select" name="city" disabled="disabled">
+            <select id="city_sel" class="weui-select" name="city" disabled="disabled">
                 <option value="bj">北京</option>
                 <option value="sh">上海</option>
                 <option value="gz">广州</option>

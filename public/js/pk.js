@@ -9,7 +9,7 @@ var vue = new Vue({
         q: null,
         my_points: 0,  // 我的分数
         fri_points: 0,
-        timer: 10
+        timer: 20
     }
 });  // 先让vue加载完元素
 
@@ -101,7 +101,7 @@ $(document).ready(function () {
 });
 
 function tm_start() {
-    vue.timer = 10;
+    vue.timer = 20;
     clearInterval(interv_id);
     interv_id = setInterval(function () {
         vue.timer -= 1;
