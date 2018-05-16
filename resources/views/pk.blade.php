@@ -16,7 +16,7 @@
         .my_btn {
             margin-top: 20px;
             width: 100%;
-            outline: none;
+            white-space: normal;
         }
     </style>
 </head>

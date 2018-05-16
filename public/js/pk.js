@@ -55,7 +55,7 @@ function terminate(msg) {
     clearInterval(interv_id);
     vue.timer = 0;
     $('.my_btn').attr('disabled', 'disabled');
-    $('#status').text(msg);
+    $('#status').html(msg);
     ws.close();
 }
 
@@ -94,7 +94,7 @@ $(document).ready(function () {
             } break;
 
             case -2:{
-                terminate('对方离开比赛');
+                terminate('对方离开<br>比赛结束');
             } break;
         }
     }
