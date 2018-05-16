@@ -102,6 +102,7 @@ $(document).ready(function () {
 
 function tm_start() {
     vue.timer = 10;
+    clearInterval(interv_id);
     interv_id = setInterval(function () {
         vue.timer -= 1;
         if (vue.timer === 0) {
