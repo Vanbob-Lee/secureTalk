@@ -19,11 +19,11 @@
             white-space: normal;
         }
         body{font-family:Microsoft YaHei;
-            background-image: url("/img/76T58PICy5t_1024.jpg");
+            background-image: url("/img/pk.jpg");
         }
-        #top{top:20px;}
+        #top{top:50px;}
         /*环形*/
-        .circle {width: 50px; height: 50px; position: absolute; border-radius: 50%;left:0;top: 20;right: 0;margin: auto;background: #00aacc;}
+        .circle {width: 50px; height: 50px; position: absolute; border-radius: 50%;left:0;top: 0;right: 0;margin: auto;background: #00aacc;}
         .pie_left, .pie_right {width: 50px; height: 50px; position: absolute; top: 0;left: 0;}
         .left,.right {display: block; width:50px; height:50px;background:#0cc; border-radius: 50%;position: absolute; top: 0; left: 0;}
         .pie_right, .right { clip:rect(0,auto,auto,25px); }
