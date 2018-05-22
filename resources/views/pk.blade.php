@@ -19,16 +19,17 @@
             white-space: normal;
         }
         body{font-family:Microsoft YaHei;
-            background-image: url("http://pic.58pic.com/58pic/15/09/95/76T58PICy5t_1024.jpg");
+            background-image: url("/img/76T58PICy5t_1024.jpg");
         }
+        #top{top:20px;}
         /*环形*/
-        .circle {width: 100px; height: 100px; position: absolute; border-radius: 50%;left:0;top: 0;right: 0;margin: auto;background: #00aacc;}
-        .pie_left, .pie_right {width: 100px; height: 100px; position: absolute; top: 0;left: 0;}
-        .left,.right {display: block; width:100px; height:100px;background:#0cc; border-radius: 50%;position: absolute; top: 0; left: 0;}
-        .pie_right, .right { clip:rect(0,auto,auto,50px); }
-        .pie_left, .left { clip:rect(0,50px,auto,0); }
-        .mask { width: 75px; height: 75px; border-radius: 50%; left: 12.5px; top: 12.5px;
-            background: #FFF; position: absolute; text-align: center; line-height: 75px; font-size: 20px; }
+        .circle {width: 50px; height: 50px; position: absolute; border-radius: 50%;left:0;top: 20;right: 0;margin: auto;background: #00aacc;}
+        .pie_left, .pie_right {width: 50px; height: 50px; position: absolute; top: 0;left: 0;}
+        .left,.right {display: block; width:50px; height:50px;background:#0cc; border-radius: 50%;position: absolute; top: 0; left: 0;}
+        .pie_right, .right { clip:rect(0,auto,auto,25px); }
+        .pie_left, .left { clip:rect(0,25px,auto,0); }
+        .mask { width: 37.5px; height: 37.5px; border-radius: 50%; left: 6.25px; top: 6.25px;
+            background: #FFF; position: absolute; text-align: center; line-height: 37.5px; font-size: 20px; }
         /*条形*/
         .container{
             width:27px;
@@ -54,7 +55,7 @@
     <div class="col-xs-4">
         <img src="{{ $me->head }}" width="50px" height="50px"><p>{{ $me->name }}</p>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-4" id="top">
         <span id="status">初始化</span>
     </div>
     <div class="col-xs-4"><img src="{{ $fri->head }}" width="50px" height="50px"><p>{{ $fri->name }}</p></div>
