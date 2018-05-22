@@ -18,15 +18,13 @@
             width: 100%;
             white-space: normal;
         }
+        body{font-family:Microsoft YaHei;
+            background-image: url("http://pic.58pic.com/58pic/15/09/95/76T58PICy5t_1024.jpg");
+        }
         /*环形*/
-        .circle {width: 100px; height: 100px; position: absolute; border-radius: 50%;
-            left:0;
-            top: 0;
-            right: 0;
-            margin: auto;
-            background: #0cc;}
+        .circle {width: 100px; height: 100px; position: absolute; border-radius: 50%;left:0;top: 0;right: 0;margin: auto;background: #00aacc;}
         .pie_left, .pie_right {width: 100px; height: 100px; position: absolute; top: 0;left: 0;}
-        .left,.right {display: block; width:100px; height:100px;background:#00aacc; border-radius: 50%;position: absolute; top: 0; left: 0;}
+        .left,.right {display: block; width:100px; height:100px;background:#0cc; border-radius: 50%;position: absolute; top: 0; left: 0;}
         .pie_right, .right { clip:rect(0,auto,auto,50px); }
         .pie_left, .left { clip:rect(0,50px,auto,0); }
         .mask { width: 75px; height: 75px; border-radius: 50%; left: 12.5px; top: 12.5px;
@@ -38,13 +36,7 @@
             border:1px solid #6C9C2C;
             height:330px;
         }
-        #my_bar{
-            background:#45e126;
-            position: absolute;
-            bottom:0px;
-            width:25px;
-        }
-        #fr_bar{
+        #my_bar, #fr_bar{
             background:#45e126;
             position: absolute;
             bottom:0px;
