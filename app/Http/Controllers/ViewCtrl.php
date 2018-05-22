@@ -76,7 +76,11 @@ mark;
             ->orderBy('created_at');
         $msg = $msg_builder->get()->all();
         $msg_builder->update(['read' => 1]);
-        return compact('con', 'msg', 'me');
+        $old_msg = Message::orderBy('created_at')
+            ->limit(5)
+            ->where('read', 1)
+            ->get()->all();
+        return compact('con', 'msg', 'me', 'old_msg');
     }
 
     // 与某个联系人的历史记录
