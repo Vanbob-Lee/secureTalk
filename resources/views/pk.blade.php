@@ -36,7 +36,7 @@
             width:27px;
             padding:0px;
             border:1px solid #6C9C2C;
-            height:300px;
+            height:330px;
         }
         #my_bar{
             background:#45e126;
