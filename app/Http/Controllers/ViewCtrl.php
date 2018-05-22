@@ -76,7 +76,7 @@ mark;
             ->orderBy('created_at');
         $msg = $msg_builder->get()->all();
         $msg_builder->update(['read' => 1]);
-        $old_msg = Message::orderBy('created_at')
+        $old_msg = Message::orderBy('created_at', 'desc')
             ->limit(5)
             ->where('read', 1)
             ->get()->all();
