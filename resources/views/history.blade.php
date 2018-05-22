@@ -39,16 +39,19 @@
 
     <script>
         var uid = '{{ $con->id }}';
+        var my_id = '{{ $me->id }}';
         $(document).ready(function () {
             var h = window.screen.height;
             // $(window).height() 非常大
             var fh = $('#footer').height();
             $('#msg_div').css('height', 3.5*h - fh);
         });
-
         function do_decrypt() {
             var cipher = $('#cipher').val();
-            var plain = decrypt(cipher, uid);
+            var chk = $('#con_msg')[0].checked;  // 如果是对方发来的消息
+            var uid1 = (chk?my_id:uid);  // 获取自己的私钥
+            var uid2 = (chk?uid:my_id);  // 如果是自己发出的消息，获取对方的私钥（不合理！但只能这么做）
+            var plain = decrypt_history(cipher, uid1, uid2);
             $('#plain').text(plain);
         }
     </script>
@@ -84,18 +87,15 @@
 </div>
 
 <div class="footer" id="footer">
+    <div class="col-xs-6"><input type="radio" name="sender">自己的消息</div>
+    <div class="col-xs-6"><input type="radio" checked="checked" name="sender" id="con_msg">对方的消息</div>
     <div class="col-xs-10" style="margin-top: 5px"><b>密文：</b><input  id="cipher"></div>
     <div class="col-xs-2"><button class="btn-info btn" style="margin-left: -25px" onclick="do_decrypt()">解密</button></div>
-    <div style="margin-left: 15px">
-        <b>明文：</b><span id="plain">void</span>
-    </div>
+    <div style="margin-left: 15px"><b>明文：</b><span id="plain">void</span></div>
+
     <div align="center">
         {{ $msg->appends(['cid' => $con->id])->links() }}<br>
         <a href="/view/chat?cid={{ $con->id }}" class="weui-footer__link">返回聊天</a>
-        {{--
-        <a href="/view/history?cid={{ $con->id }}&page=1" class="weui-footer__link">第一页&nbsp;</a>
-        <a href="/view/history?cid={{ $con->id }}&page={{ $msg->lastPage() }}" class="weui-footer__link">末页</a>
-        --}}
     </div>
 </div>
 </body>
