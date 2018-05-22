@@ -3,6 +3,27 @@ var ws;
 var i_chs, fri_chs;  // 自己或对方回答了当前题目
 ichs = fri_chs = 0;
 
+//环形进度条——计时
+function set_cir() {
+    $('.circle').each(function(index, el) {
+        var num =vue.timer * 18;
+        if (num<=162) {
+            $(this).find('.right').css('transform', "rotate(" + num + "deg)");
+        } else {
+            $(this).find('.right').css('transform', "rotate(180deg)");
+            $(this).find('.left').css('transform', "rotate(" + (num - 180) + "deg)");
+        };
+    });
+}
+
+//条形进度条——计分
+function set_bar(){
+    var my_bar = document.getElementById("my_bar");
+    var fr_bar = document.getElementById("fr_bar");
+    my_bar.style.height= vue.my_points/50 + "%";
+    fr_bar.style.height= vue.fri_points/50 + "%";
+}
+
 var vue = new Vue({
     el: '#app',
     data: {
@@ -86,6 +107,7 @@ $(document).ready(function () {
             case 3:{
                 fri_chs = 1;
                 vue.fri_points = data.points;
+                set_bar();
                 if (i_chs) q_end();
             } break;
 
@@ -102,10 +124,13 @@ $(document).ready(function () {
 
 function tm_start() {
     vue.timer = 20;
+    set_cir();
     clearInterval(interv_id);
     interv_id = setInterval(function () {
         vue.timer -= 1;
+        set_cir();
         if (vue.timer === 0) {
+            set_cir();
             q_end();
         }
     }, 1000);
@@ -132,6 +157,7 @@ function chk_ans(ele) {
     if (ele.value === vue.q.answer) {
         vue.my_points += 20 * vue.timer;
         $(ele).addClass('btn-success');
+        set_bar();
     } else {
         $(ele).addClass('btn-danger');
     }
