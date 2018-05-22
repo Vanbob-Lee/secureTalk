@@ -25,8 +25,12 @@ Route::get('/test', function() {
     }
     return $val;
     */
-
-    \Illuminate\Support\Facades\Cache::flush();
+    return \Illuminate\Support\Facades\Cache::rememberForever('test', function (){
+        return 'abbcc';
+    });
+});
+Route::get('/flush', function() {
+    Cache::flush();
     return "flush ok";
 });
 
