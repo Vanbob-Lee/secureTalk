@@ -72,14 +72,15 @@ function decrypt(packet_str, uid) {
     try {
         var packet = eval('(' + packet_str + ')');
     } catch (err) {
-        // eval()解析失败，说明原本就是明文（可能是由于发送方的浏览器不支持加密）
-        // 直接返回即可
+        // eval()解析失败，说明原本就是明文，直接返回即可
         return packet_str;
     }
     var ks, kua, n;
     $.ajax({
         url: '/open/get_ks',
-        data: { 'env': packet.envelope },
+        data: {
+            env: packet.envelope
+        },
         type: 'post',
         async: false,
         success: function (ret) {
@@ -103,6 +104,57 @@ function decrypt(packet_str, uid) {
         error: function (err) {
             console.log(err);
             alert('无法获取对方公钥');
+        }
+    });
+    var flag = 0;
+    var msg = msg_sign.msg;
+    var hash = CryptoJS.MD5(msg).toString();
+    var sign = msg_sign.sign;
+    for (var i=0; i<32; i++) {
+        var dec_sign_i = mod_exp(sign[i], kua, n);
+        if (dec_sign_i !== parseInt(hash[i], 16)) flag = 1;
+    }
+    if (flag) msg = '[此消息认证失败]' + msg;
+    return msg;
+}
+
+function decrypt_history(packet_str, uid1, uid2) {
+    try {
+        var packet = eval('(' + packet_str + ')');
+    } catch (err) {
+        // eval()解析失败，说明原本就是明文，直接返回即可
+        return packet_str;
+    }
+    var ks, kua, n;
+    $.ajax({
+        url: '/open/get_history_ks',
+        data: {
+            env: packet.envelope,
+            uid: uid1
+        },
+        type: 'post',
+        async: false,
+        success: function (ret) {
+            ks = ret;
+        },
+        error: function (err) {
+            console.log(err);
+            alert('无法获取会话密钥');
+        }
+    });
+    var msg_sign_str = decryptByDES(packet.data, ks);
+    var msg_sign = eval('(' + msg_sign_str + ')');
+    $.ajax({
+        url: '/open/get_pub_key',
+        async: false,
+        data: { id: uid2 },
+        success: function (ret) {
+            kua = ret.pub;
+            n = ret.n;
+        },
+        error: function (err) {
+            console.log(err);
+            alert('无法获取接收者公钥');
         }
     });
     var flag = 0;

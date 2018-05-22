@@ -59,14 +59,23 @@ class OpenCtrl extends Controller
             throw new Exception("Not Login");
         }
 
-        return Cache::remember('pri_'.$user->id, 0, function () use($user){
+        return Cache::rememberForever('pri_'.$user->id, function () use($user){
             $pub = $this->get_pub_inner($user->id);
             return reverse($pub, $this->fi);
         });
     }
 
+    // 访问别人的私钥
+    private function get_pri_insecure($uid) {
+        return Cache::rememberForever('pri_'.$uid, function () use($uid){
+            $pub = $this->get_pub_inner($uid);
+            return reverse($pub, $this->fi);
+        });
+    }
+
+    // 公钥：截取字符
     private function get_pub_inner($uid) {
-        return Cache::remember("pub_$uid", 0, function () use($uid){
+        return Cache::rememberForever("pub_$uid", function () use($uid){
             $user = User::find($uid);
             $last = ord(substr($user->password, -1));
             return get_prime($last, $this->fi);
@@ -94,6 +103,11 @@ class OpenCtrl extends Controller
 
     private function get_ks($req) {
         $pri_key = $this->get_pri_key();
+        return $this->mod_exp($req->env, $pri_key);
+    }
+
+    private function get_history_ks($req) {
+        $pri_key = $this->get_pri_insecure($req->uid);
         return $this->mod_exp($req->env, $pri_key);
     }
 }

@@ -74,7 +74,7 @@ function share() {
     var host = window.location.host;
     var route = $('#img_get').attr('src');
     var msg = '[隐写图片] 请打开链接查看：' + host + route;
-    var content = process(msg, cid);
+    //var content = process(msg, cid); 消息太长 不要加密
     var data = {
         sender_id: my_id,
         recv_id: cid,

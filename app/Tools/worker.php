@@ -107,7 +107,12 @@ function send_q($con_id) {
     while(!$q || in_array($q['id'], $qids)) {
         $sel_id = (int)rand(1, $max_id);
         $sql = "select * from questions where id = $sel_id";
-        $q = $db_con->query($sql)->fetch_assoc();
+        try {
+            $q = $db_con->query($sql)->fetch_assoc();
+        } catch (Exception $e) {
+            global $host, $username, $psw, $dbname;
+            $db_con = new mysqli($host, $username, $psw, $dbname);
+        }
     }
     $pk_list[$con_id]['qids'][] = $q['id'];  // 标记为已用题目
     $arr = ['code' => 2, 'q' => $q];  // code=2：分发题目
