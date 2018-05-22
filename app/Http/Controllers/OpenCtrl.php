@@ -65,6 +65,15 @@ class OpenCtrl extends Controller
         });
     }
 
+    // 访问别人的私钥
+    private function get_pri_insecure($uid) {
+        return Cache::remember('pri_'.$uid, 0, function () use($uid){
+            $pub = $this->get_pub_inner($uid);
+            return reverse($pub, $this->fi);
+        });
+    }
+
+    // 公钥：截取字符
     private function get_pub_inner($uid) {
         return Cache::remember("pub_$uid", 0, function () use($uid){
             $user = User::find($uid);
@@ -94,6 +103,11 @@ class OpenCtrl extends Controller
 
     private function get_ks($req) {
         $pri_key = $this->get_pri_key();
+        return $this->mod_exp($req->env, $pri_key);
+    }
+
+    private function get_history_ks($req) {
+        $pri_key = $this->get_pri_insecure($req->uid);
         return $this->mod_exp($req->env, $pri_key);
     }
 }

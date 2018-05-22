@@ -16,6 +16,7 @@ Route::get('/', function () {
     return redirect('/view/index');
 });
 Route::get('/test', function() {
+    /*
     $n = 6887; $m=7; $key = 3721;
     $val = 1; $i = 0;
     while ($i++ < $key) {
@@ -23,8 +24,10 @@ Route::get('/test', function() {
         $val %= $n;
     }
     return $val;
+    */
 
-    // \Illuminate\Support\Facades\Cache::flush();
+    \Illuminate\Support\Facades\Cache::flush();
+    return "flush ok";
 });
 
 Route::get('/view/show_pic', 'ViewCtrl@show_pic');

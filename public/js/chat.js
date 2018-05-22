@@ -68,7 +68,8 @@ var loc_msg;
 function get_address(ret) {
     var rs = ret.result;
     loc_msg += '，地址：' + rs.formatted_address + '，描述：' + rs.sematic_description;
-    send_inner(loc_msg);
+    //send_inner(loc_msg);
+    send_plain(loc_msg);
 }
 // 发送位置
 function send_pos(pos) {
@@ -85,6 +86,30 @@ function send_inner(msg) {
         return;
     }
     var content = process(msg, cid);
+    var data = {
+        sender_id: my_id,
+        recv_id: cid,
+        content: content
+    };
+    $.ajax({
+        url: '/logic/send_msg',
+        type: 'post',
+        data: data,
+        success: function(ret) {
+            my_msg(msg, ret);  // ret: 时间戳
+        },
+        error: function (err) {
+            alert('消息发送失败');
+            console.log(err);
+        }
+    });
+}
+
+function send_plain(msg) {
+    if (msg == '') {
+        alert('不能发送空消息');
+        return;
+    }
     var data = {
         sender_id: my_id,
         recv_id: cid,
@@ -138,18 +163,5 @@ $(document).ready(function () {
         var plain = decrypt(cips[i].value, cid);
         $(cips[i]).next().text(plain);
     }
-
-    /* 悬浮按钮
-    var float_div = $('.float_div');
-    float_div.click(function () {
-        window.location = '/view/index';
-    });
-    msg_div.scroll(function (e) {
-        var d = msg_div.scrollTop();
-        if (d > 30) float_div.css('display', 'block');
-        if (d < 10) float_div.css('display', 'none');
-    });
-    */
-
     setInterval(recv, 5000);
 });
