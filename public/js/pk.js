@@ -20,8 +20,8 @@ function set_cir() {
 function set_bar(){
     var my_bar = document.getElementById("my_bar");
     var fr_bar = document.getElementById("fr_bar");
-    my_bar.style.height= vue.my_points/50 + "%";
-    fr_bar.style.height= vue.fri_points/50 + "%";
+    my_bar.style.height= vue.my_points/20 + "%";
+    fr_bar.style.height= vue.fri_points/20 + "%";
 }
 
 var vue = new Vue({
