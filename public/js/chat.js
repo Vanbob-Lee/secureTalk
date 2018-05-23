@@ -67,7 +67,8 @@ function get_pos() {
 var loc_msg;
 function get_address(ret) {
     var rs = ret.result;
-    loc_msg += '，地址：' + rs.formatted_address + '，描述：' + rs.sematic_description;
+    loc_msg += '，地址：' + rs.formatted_address + '，描述：' + rs.sematic_description
+        +'，链接'+'[图片]http://api.map.baidu.com/marker?location='+rs.location.lat+','+rs.location.lng+'&title=我的位置&content='+rs.formatted_address+'&output=html';
     //send_inner(loc_msg);
     send_plain(loc_msg);
 }
