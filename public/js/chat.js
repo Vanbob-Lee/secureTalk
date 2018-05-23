@@ -161,7 +161,13 @@ $(document).ready(function () {
     // 解密第一批未读消息
     var cips = $('.cipher');
     for (var i=0; i<cips.length; i++) {
-        var plain = decrypt(cips[i].value, cid);
+        var plain;
+        var li_ele = $(cips[i]).parent();
+        if (li_ele.hasClass('my_li')) {
+            plain = decrypt_history(cips[i].value, cid, my_id);  // 解密自己的消息
+        } else {
+            plain = decrypt(cips[i].value, cid);  // 解密对方的
+        }
         $(cips[i]).next().text(plain);
     }
     setInterval(recv, 5000);
