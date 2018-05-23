@@ -136,7 +136,7 @@ function tm_start() {
     }, 1000);
 }
 
-// 计时结束 或 双方都回答了，加载下一题
+//计时结束 或 双方都回答了，加载下一题
 function q_end() {
     clearInterval(interv_id);
     var btns = $('.my_btn');
