@@ -39,7 +39,7 @@
         #my_bar, #fr_bar{
             background:#45e126;
             position: absolute;
-            bottom:0px;
+            bottom:1px;
             width:25px;
         }
     </style>
