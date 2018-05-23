@@ -113,7 +113,7 @@ function send_plain(msg) {
     var data = {
         sender_id: my_id,
         recv_id: cid,
-        content: content
+        content: msg
     };
     $.ajax({
         url: '/logic/send_msg',
