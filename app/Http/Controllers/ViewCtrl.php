@@ -70,18 +70,28 @@ mark;
     private function chat($req) {
         $me = $this->me;
         $con = User::find($req->cid);
+
+        $old_msg = Message::orderBy('created_at', 'desc')
+            ->limit(5)
+            ->where(function ($q) use($con){
+                $q->orwhere(function ($q1) use($con){
+                    $q1->where('recv_id', $this->me->id)
+                        ->where('sender_id', $con->id);
+                })->orwhere(function ($q2) use($con){
+                    $q2->where('recv_id', $con->id)
+                        ->where('sender_id', $this->me->id);
+                });
+            })
+            ->where('read', 1)
+            ->get()->all();
+        $old_msg = array_reverse($old_msg);
+
         $msg_builder = Message::where('read', 0)
             ->where('recv_id', $this->me->id)
             ->where('sender_id', $con->id)
             ->orderBy('created_at');
         $msg = $msg_builder->get()->all();
         $msg_builder->update(['read' => 1]);
-        $old_msg = Message::orderBy('created_at', 'desc')
-            ->limit(5)
-            ->where('recv_id', $this->me->id)
-            ->where('sender_id', $con->id)
-            ->where('read', 1)
-            ->get()->all();
         return compact('con', 'msg', 'me', 'old_msg');
     }
 
