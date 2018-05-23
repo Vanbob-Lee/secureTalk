@@ -1,0 +1,189 @@
+2018-05-14 14:28:04 Error: Call to undefined method stdClass::send() in D:\1Current\Projects\secureTalk\app\Tools\worker.php:56
+Stack trace:
+#0 D:\1Current\Projects\secureTalk\app\Tools\worker.php(90): req_pk(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#1 D:\1Current\Projects\secureTalk\app\Tools\worker.php(18): process(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), '{"code":0,"my_i...')
+#3 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(632): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"code":0,"my_i...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #19)
+#5 D:\1Current\Projects\secureTalk\app\Tools\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(473): Workerman\Worker->run()
+#8 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#9 D:\1Current\Projects\secureTalk\app\Tools\worker.php(97): Workerman\Worker::runAll()
+#10 {main}
+2018-05-14 14:37:08 Error: Call to a member function send() on null in D:\1Current\Projects\secureTalk\app\Tools\worker.php:42
+Stack trace:
+#0 D:\1Current\Projects\secureTalk\app\Tools\worker.php(89): accept(Object(Workerman\Connection\TcpConnection), 1)
+#1 D:\1Current\Projects\secureTalk\app\Tools\worker.php(18): process(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), '{"code":0,"my_i...')
+#3 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(632): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"code":0,"my_i...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #24)
+#5 D:\1Current\Projects\secureTalk\app\Tools\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(473): Workerman\Worker->run()
+#8 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#9 D:\1Current\Projects\secureTalk\app\Tools\worker.php(98): Workerman\Worker::runAll()
+#10 {main}
+2018-05-15 05:36:47 Error: Call to a member function send() on null in D:\1Current\Projects\secureTalk\app\Tools\worker.php:42
+Stack trace:
+#0 D:\1Current\Projects\secureTalk\app\Tools\worker.php(89): accept(Object(Workerman\Connection\TcpConnection), 1)
+#1 D:\1Current\Projects\secureTalk\app\Tools\worker.php(18): process(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), '{"code":0,"my_i...')
+#3 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(632): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"code":0,"my_i...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #24)
+#5 D:\1Current\Projects\secureTalk\app\Tools\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(473): Workerman\Worker->run()
+#8 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#9 D:\1Current\Projects\secureTalk\app\Tools\worker.php(98): Workerman\Worker::runAll()
+#10 {main}
+2018-05-15 05:51:30 Error: Call to a member function send() on null in D:\1Current\Projects\secureTalk\app\Tools\worker.php:42
+Stack trace:
+#0 D:\1Current\Projects\secureTalk\app\Tools\worker.php(89): accept(Object(Workerman\Connection\TcpConnection), 1)
+#1 D:\1Current\Projects\secureTalk\app\Tools\worker.php(18): process(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), '{"code":0,"my_i...')
+#3 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(632): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"code":0,"my_i...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #24)
+#5 D:\1Current\Projects\secureTalk\app\Tools\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(473): Workerman\Worker->run()
+#8 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#9 D:\1Current\Projects\secureTalk\app\Tools\worker.php(98): Workerman\Worker::runAll()
+#10 {main}
+2018-05-15 06:12:13 Error: Call to a member function send() on null in D:\1Current\Projects\secureTalk\app\Tools\worker.php:33
+Stack trace:
+#0 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection))
+#1 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(843): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection))
+#2 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(757): Workerman\Connection\TcpConnection->destroy()
+#3 D:\1Current\Projects\secureTalk\app\Tools\workerman\Protocols\Websocket.php(98): Workerman\Connection\TcpConnection->close()
+#4 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(596): Workerman\Protocols\Websocket::input('\x88\x82\x1F\xFB\xD4\xE7\x1C\x12', Object(Workerman\Connection\TcpConnection))
+#5 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #19)
+#6 D:\1Current\Projects\secureTalk\app\Tools\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#7 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#8 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(473): Workerman\Worker->run()
+#9 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\1Current\Projects\secureTalk\app\Tools\worker.php(115): Workerman\Worker::runAll()
+#11 {main}
+2018-05-15 06:14:00 Error: Call to a member function send() on null in D:\1Current\Projects\secureTalk\app\Tools\worker.php:34
+Stack trace:
+#0 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection))
+#1 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(843): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection))
+#2 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(757): Workerman\Connection\TcpConnection->destroy()
+#3 D:\1Current\Projects\secureTalk\app\Tools\workerman\Protocols\Websocket.php(98): Workerman\Connection\TcpConnection->close()
+#4 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(596): Workerman\Protocols\Websocket::input('\x88\x82{\xF8\x9A\xC2x\x11', Object(Workerman\Connection\TcpConnection))
+#5 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #19)
+#6 D:\1Current\Projects\secureTalk\app\Tools\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#7 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#8 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(473): Workerman\Worker->run()
+#9 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\1Current\Projects\secureTalk\app\Tools\worker.php(116): Workerman\Worker::runAll()
+#11 {main}
+2018-05-15 06:17:12 Error: Call to a member function send() on null in D:\1Current\Projects\secureTalk\app\Tools\worker.php:33
+Stack trace:
+#0 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection))
+#1 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(843): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection))
+#2 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(757): Workerman\Connection\TcpConnection->destroy()
+#3 D:\1Current\Projects\secureTalk\app\Tools\workerman\Protocols\Websocket.php(98): Workerman\Connection\TcpConnection->close()
+#4 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(596): Workerman\Protocols\Websocket::input('\x88\x82:\x06+\xB19\xEF', Object(Workerman\Connection\TcpConnection))
+#5 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #19)
+#6 D:\1Current\Projects\secureTalk\app\Tools\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#7 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#8 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(473): Workerman\Worker->run()
+#9 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\1Current\Projects\secureTalk\app\Tools\worker.php(115): Workerman\Worker::runAll()
+#11 {main}
+2018-05-15 06:18:48 Error: Call to a member function send() on integer in D:\1Current\Projects\secureTalk\app\Tools\worker.php:28
+Stack trace:
+#0 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection))
+#1 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(843): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection))
+#2 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(757): Workerman\Connection\TcpConnection->destroy()
+#3 D:\1Current\Projects\secureTalk\app\Tools\workerman\Protocols\Websocket.php(98): Workerman\Connection\TcpConnection->close()
+#4 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(596): Workerman\Protocols\Websocket::input('\x88\x82\xE3\xDE8\xB7\xE07', Object(Workerman\Connection\TcpConnection))
+#5 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #19)
+#6 D:\1Current\Projects\secureTalk\app\Tools\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#7 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#8 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(473): Workerman\Worker->run()
+#9 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\1Current\Projects\secureTalk\app\Tools\worker.php(115): Workerman\Worker::runAll()
+#11 {main}
+2018-05-15 06:20:14 Error: Call to a member function send() on null in D:\1Current\Projects\secureTalk\app\Tools\worker.php:34
+Stack trace:
+#0 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection))
+#1 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(843): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection))
+#2 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(757): Workerman\Connection\TcpConnection->destroy()
+#3 D:\1Current\Projects\secureTalk\app\Tools\workerman\Protocols\Websocket.php(98): Workerman\Connection\TcpConnection->close()
+#4 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(596): Workerman\Protocols\Websocket::input('\x88\x82|om~\x7F\x86', Object(Workerman\Connection\TcpConnection))
+#5 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #22)
+#6 D:\1Current\Projects\secureTalk\app\Tools\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#7 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#8 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(473): Workerman\Worker->run()
+#9 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\1Current\Projects\secureTalk\app\Tools\worker.php(116): Workerman\Worker::runAll()
+#11 {main}
+2018-05-15 06:52:22 Error: Call to a member function send() on null in D:\1Current\Projects\secureTalk\app\Tools\worker.php:29
+Stack trace:
+#0 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection))
+#1 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(843): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection))
+#2 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(757): Workerman\Connection\TcpConnection->destroy()
+#3 D:\1Current\Projects\secureTalk\app\Tools\workerman\Protocols\Websocket.php(98): Workerman\Connection\TcpConnection->close()
+#4 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(596): Workerman\Protocols\Websocket::input('\x88\x82\xCDz\x01\xA7\xCE\x93', Object(Workerman\Connection\TcpConnection))
+#5 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #23)
+#6 D:\1Current\Projects\secureTalk\app\Tools\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#7 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#8 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(473): Workerman\Worker->run()
+#9 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\1Current\Projects\secureTalk\app\Tools\worker.php(117): Workerman\Worker::runAll()
+#11 {main}
+2018-05-15 07:16:15 Error: Call to a member function send() on null in D:\1Current\Projects\secureTalk\app\Tools\worker.php:64
+Stack trace:
+#0 D:\1Current\Projects\secureTalk\app\Tools\worker.php(111): accept(Object(Workerman\Connection\TcpConnection), 1)
+#1 D:\1Current\Projects\secureTalk\app\Tools\worker.php(18): process(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), '{"code":0,"my_i...')
+#3 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(632): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"code":0,"my_i...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #27)
+#5 D:\1Current\Projects\secureTalk\app\Tools\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(473): Workerman\Worker->run()
+#8 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#9 D:\1Current\Projects\secureTalk\app\Tools\worker.php(120): Workerman\Worker::runAll()
+#10 {main}
+2018-05-15 09:31:15 Exception: You can't send(NULL) to client, you need to convert it to a string.  in D:\1Current\Projects\secureTalk\app\Tools\workerman\Protocols\Websocket.php:225
+Stack trace:
+#0 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(313): Workerman\Protocols\Websocket::encode(NULL, Object(Workerman\Connection\TcpConnection))
+#1 D:\1Current\Projects\secureTalk\app\Tools\worker.php(139): Workerman\Connection\TcpConnection->send(NULL)
+#2 D:\1Current\Projects\secureTalk\app\Tools\worker.php(18): process(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#3 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), '{"code":2,"my_i...')
+#4 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(632): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"code":2,"my_i...')
+#5 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #25)
+#6 D:\1Current\Projects\secureTalk\app\Tools\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#7 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#8 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(473): Workerman\Worker->run()
+#9 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#10 D:\1Current\Projects\secureTalk\app\Tools\worker.php(145): Workerman\Worker::runAll()
+#11 {main}
+2018-05-15 12:07:05 Error: Call to a member function send() on null in D:\1Current\Projects\secureTalk\app\Tools\worker.php:94
+Stack trace:
+#0 D:\1Current\Projects\secureTalk\app\Tools\worker.php(130): send_q(3)
+#1 D:\1Current\Projects\secureTalk\app\Tools\worker.php(18): process(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), '{"code":1,"my_i...')
+#3 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(632): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"code":1,"my_i...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #23)
+#5 D:\1Current\Projects\secureTalk\app\Tools\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(473): Workerman\Worker->run()
+#8 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#9 D:\1Current\Projects\secureTalk\app\Tools\worker.php(146): Workerman\Worker::runAll()
+#10 {main}
+2018-05-15 13:00:20 Error: Call to a member function send() on null in D:\1Current\Projects\secureTalk\app\Tools\worker.php:111
+Stack trace:
+#0 D:\1Current\Projects\secureTalk\app\Tools\worker.php(130): send_q(19)
+#1 D:\1Current\Projects\secureTalk\app\Tools\worker.php(18): process(Object(Workerman\Connection\TcpConnection), Object(stdClass))
+#2 [internal function]: {closure}(Object(Workerman\Connection\TcpConnection), '{"code":1,"my_i...')
+#3 D:\1Current\Projects\secureTalk\app\Tools\workerman\Connection\TcpConnection.php(632): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"code":1,"my_i...')
+#4 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #39)
+#5 D:\1Current\Projects\secureTalk\app\Tools\workerman\Events\Select.php(286): call_user_func_array(Array, Array)
+#6 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(856): Workerman\Events\Select->loop()
+#7 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(473): Workerman\Worker->run()
+#8 D:\1Current\Projects\secureTalk\app\Tools\workerman\Worker.php(382): Workerman\Worker::runAllWorkers()
+#9 D:\1Current\Projects\secureTalk\app\Tools\worker.php(146): Workerman\Worker::runAll()
+#10 {main}
