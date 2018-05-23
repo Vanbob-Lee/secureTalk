@@ -34,7 +34,7 @@
             width:27px;
             padding:0px;
             border:1px solid #6C9C2C;
-            height:330px;
+            height:332px;
         }
         #my_bar, #fr_bar{
             background:#45e126;
