@@ -5,7 +5,7 @@ ichs = fri_chs = 0;
 
 //环形进度条——计时
 function set_cir() {
-    $('.circle').each(function(index, el) {
+    $('.circle').each(function() {
         var num =vue.timer * 18;
         if (num<=162) {
             $(this).find('.right').css('transform', "rotate(" + num + "deg)");
@@ -130,7 +130,6 @@ function tm_start() {
         vue.timer -= 1;
         set_cir();
         if (vue.timer === 0) {
-            set_cir();
             q_end();
         }
     }, 1000);
