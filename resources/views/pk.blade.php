@@ -18,7 +18,8 @@
             width: 100%;
             white-space: normal;
         }
-        body{font-family:Microsoft YaHei;
+        body{
+            font-family:Microsoft YaHei;
             background-image: url("/img/pk.jpg");
         }
         #top{top:50px;}
