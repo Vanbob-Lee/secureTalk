@@ -27,17 +27,19 @@
     <ul class="list-group" id="list">
         @foreach($old_msg as $m)
             @if($m->sender_id == $con->id)
-            <li class="list-group-item con_li">
-                <p style="color: #1b6d85"><b>{{ $con->name }}</b>&nbsp;&nbsp;&nbsp;{{ $m->created_at }}</p>
-                <input type="hidden" value="{{ $m->content }}" class="cipher">
-                <span style="margin-left: 5px"></span>
-            </li>
+                <li class="list-group-item con_li">
+                    <p style="color: #1b6d85"><b>{{ $con->name }}</b>&nbsp;&nbsp;&nbsp;{{ $m->created_at }}</p>
+                    <input type="hidden" value="{{ $m->content }}" class="cipher">
+                    <span style="margin-left: 5px"></span>
+                </li>
             @else
+                <div align="right">
                 <li class="list-group-item my_li">
                     <p style="color: #1b6d85"><b>{{ $me->name }}</b>&nbsp;&nbsp;&nbsp;{{ $m->created_at }}</p>
                     <input type="hidden" value="{{ $m->content }}" class="cipher">
                     <span style="margin-left: 5px"></span>
                 </li>
+                </div>
             @endif
         @endforeach
         <li class="list-group-item" style="text-align: center">
