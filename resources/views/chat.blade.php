@@ -26,22 +26,12 @@
 <div style="overflow: scroll;width: 100%" id="msg_div">
     <ul class="list-group" id="list">
         @foreach($old_msg as $m)
+            @if($m->sender_id == $con->id)
             <li class="list-group-item con_li">
                 <p style="color: #1b6d85"><b>{{ $con->name }}</b>&nbsp;&nbsp;&nbsp;{{ $m->created_at }}</p>
                 <input type="hidden" value="{{ $m->content }}" class="cipher">
                 <span style="margin-left: 5px"></span>
             </li>
-        @endforeach
-        <li class="list-group-item" style="text-align: center">
-            <span class="weui-loadmore__tips">显示5条历史消息，以下为新消息</span>
-        </li>
-        @foreach($msg as $m)
-            @if($m->sender_id == $con->id)
-                <li class="list-group-item con_li">
-                    <p style="color: #1b6d85"><b>{{ $con->name }}</b>&nbsp;&nbsp;&nbsp;{{ $m->created_at }}</p>
-                    <input type="hidden" value="{{ $m->content }}" class="cipher">
-                    <span style="margin-left: 5px"></span>
-                </li>
             @else
                 <li class="list-group-item my_li">
                     <p style="color: #1b6d85"><b>{{ $me->name }}</b>&nbsp;&nbsp;&nbsp;{{ $m->created_at }}</p>
@@ -49,6 +39,16 @@
                     <span style="margin-left: 5px"></span>
                 </li>
             @endif
+        @endforeach
+        <li class="list-group-item" style="text-align: center">
+            <span class="weui-loadmore__tips">显示5条历史消息，以下为新消息</span>
+        </li>
+        @foreach($msg as $m)
+            <li class="list-group-item con_li">
+                <p style="color: #1b6d85"><b>{{ $con->name }}</b>&nbsp;&nbsp;&nbsp;{{ $m->created_at }}</p>
+                <input type="hidden" value="{{ $m->content }}" class="cipher">
+                <span style="margin-left: 5px"></span>
+            </li>
         @endforeach
     </ul>
 </div>
