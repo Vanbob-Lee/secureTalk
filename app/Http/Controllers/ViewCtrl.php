@@ -78,6 +78,8 @@ mark;
         $msg_builder->update(['read' => 1]);
         $old_msg = Message::orderBy('created_at', 'desc')
             ->limit(5)
+            ->where('recv_id', $this->me->id)
+            ->where('sender_id', $con->id)
             ->where('read', 1)
             ->get()->all();
         return compact('con', 'msg', 'me', 'old_msg');
