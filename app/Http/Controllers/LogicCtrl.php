@@ -23,11 +23,6 @@ class LogicCtrl extends Controller
         return $this->$part($req);
     }
 
-    private function logout() {
-        Auth::logout();
-        return 1;
-    }
-
     private function edit_info($req) {
         $info = $req->post();
         $uid = $info['id']; $name = $info['name'];
@@ -35,6 +30,11 @@ class LogicCtrl extends Controller
         $info_str = json_encode($info);
         User::find($uid)->update(['info' => $info_str, 'name'=> $name]);
         return redirect('/view/index');
+    }
+
+    private function logout() {
+        Auth::logout();
+        return 1;
     }
 
     private function add_contact($req) {

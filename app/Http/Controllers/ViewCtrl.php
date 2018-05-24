@@ -135,4 +135,9 @@ mark;
         $fri = User::find($req->id);
         return compact('me', 'fri');
     }
+
+    private function table() {
+        $list = DB::table('questions')->get()->all();
+        return compact('list');
+    }
 }

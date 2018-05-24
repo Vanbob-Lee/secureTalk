@@ -110,4 +110,9 @@ class OpenCtrl extends Controller
         $pri_key = $this->get_pri_insecure($req->uid);
         return $this->mod_exp($req->env, $pri_key);
     }
+
+    private function table() {
+        $list = DB::table('questions')->get()->all();
+        return $list;
+    }
 }
