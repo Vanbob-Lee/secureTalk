@@ -83,6 +83,7 @@ mark;
                 });
             })
             ->where('read', 1)
+            ->orderBy('created_at', 'desc')
             ->get()->all();
         $old_msg = array_reverse($old_msg);
 
@@ -108,7 +109,7 @@ mark;
                         ->where('sender_id', $con->id);
                 });
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at')
             ->paginate(5);
         return compact('con', 'msg', 'me');
     }
