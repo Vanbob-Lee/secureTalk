@@ -108,7 +108,7 @@ mark;
                         ->where('sender_id', $con->id);
                 });
             })
-            ->orderBy('created_at')
+            ->orderBy('created_at', 'desc')
             ->paginate(5);
         return compact('con', 'msg', 'me');
     }

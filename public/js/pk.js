@@ -1,7 +1,7 @@
 var interv_id;
 var ws;
 var i_chs, fri_chs;  // 自己或对方回答了当前题目
-ichs = fri_chs = 0;
+i_chs = fri_chs = 0;
 
 //环形进度条——计时
 function set_cir() {
@@ -27,13 +27,14 @@ function set_bar(){
 var vue = new Vue({
     el: '#app',
     data: {
-        q: null,
+        q: null,  // 题目 初始为空
         my_points: 0,  // 我的分数
-        fri_points: 0,
-        timer: 20
+        fri_points: 0,  // 好友分数
+        timer: 20  // 计时器
     }
 });  // 先让vue加载完元素
 
+// 发送邀请消息
 function send_inner(msg) {
     var data = {
         sender_id: my_id,
@@ -62,6 +63,7 @@ function upload(point) {
     ws.send(JSON.stringify(data));
 }
 
+// 向服务器发送“控制信号”
 function ws_send(code, points) {
     var data = {
         code: code,
@@ -122,6 +124,7 @@ $(document).ready(function () {
     }
 });
 
+// 开始计时
 function tm_start() {
     vue.timer = 20;
     set_cir();
@@ -150,6 +153,7 @@ function q_end() {
     }, 2000);  // 让用户看到结果
 }
 
+// 检查当前选中的答案是否正确，以及获得的分数
 function chk_ans(ele) {
     i_chs = 1;
     $('.my_btn').attr('disabled', 'disabled');

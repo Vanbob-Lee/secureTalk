@@ -82,8 +82,9 @@ function req_pk($con, $data) {
     $con->send($ret);
 }
 
-// 发送题目到某一“对战”
-// 参数$con_id必定是发起者，只有发起者能请求题目
+/* 抽取题目并发送到某一“对战”
+参数$con_id必定是发起者，只有发起者能请求题目
+*/
 function send_q($con_id) {
     global $worker, $pk_list, $db_con, $max_id;
     $qids = $pk_list[$con_id]['qids'];
